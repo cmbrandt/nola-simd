@@ -1,4 +1,5 @@
-// nola_avx2.hxx
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #ifndef NOLA_AVX2_HXX
 #define NOLA_AVX2_HXX

@@ -2,14 +2,17 @@
 // All rights reserved
 
 #include <iostream>
-#include <avx2.hxx>
-#include <avx512.hxx>
-
+#include <avx2_float.hxx>
+#include <avx2_double.hxx>
+#include <avx512_float.hxx>
+#include <avx512_double.hxx>
 
 int main()
 {
-  avx2();
-  avx512();
+  test_avx2_float();
+  test_avx2_double();
+  test_avx512_float();
+  test_avx512_double();
 
-  std::cout << "\nend of test.cxx\n\n\n";
+  std::cout << "\nEnd of test.\n\n\n";
 }

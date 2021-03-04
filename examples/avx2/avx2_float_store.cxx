@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <vector>
-#include <nola/cxx17/simd.hxx>
-#include <nola/cxx17/util.hxx>
+#include <nola/simd.hxx>
+#include <nola/util.hxx>
 
 
 int main()

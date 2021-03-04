@@ -2,7 +2,7 @@
 // All rights reserved
 
 #include <iostream>
-#include <nola/cxx17/simd.hxx>
+#include <nola/simd.hxx>
 
 
 int main()

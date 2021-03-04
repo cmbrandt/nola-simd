@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <nola/cxx17/simd.hxx>
+#include <nola/simd.hxx>
  
 
 int main()

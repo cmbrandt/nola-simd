@@ -1,16 +1,13 @@
 #ifndef NOLA_TRAITS_HXX
 #define NOLA_TRAITS_HXX
 
-include <type_traits>
+#include <type_traits>
 
 
 namespace nola
 {
 
-
-//
 // Declarations
-
 template <class T> struct is_integer;
 template <class T> struct is_real;
 
@@ -20,14 +17,12 @@ template <class T>
   constexpr bool is_real_v    = nola::is_real<T>::value;
 
 
-//
 // nola::is_integer
-
 namespace detail
 {
   template <class T> struct is_integer_impl                     : public std::false_type { };
   template <>        struct is_integer_impl<short>              : public std::true_type  { };
-  template <>        struct is_integer_impl<short>              : public std::true_type  { };
+  template <>        struct is_integer_impl<unsigned short>     : public std::true_type  { };
   template <>        struct is_integer_impl<int>                : public std::true_type  { };
   template <>        struct is_integer_impl<unsigned int>       : public std::true_type  { };
   template <>        struct is_integer_impl<long>               : public std::true_type  { };
@@ -41,9 +36,7 @@ struct is_integer
   : public nola::detail::is_integer_impl<std::remove_cvref_t<T>> { };
 
 
-//
 // nola::is_real
-
 namespace detail
 {
   template <class T> struct is_real_impl         : public std::false_type { };
@@ -54,7 +47,6 @@ namespace detail
 template <class T>
 struct is_real
   : public nola::detail::is_real_impl<std::remove_cvref_t<T>> { };
-
 
 } // namespace nola
 

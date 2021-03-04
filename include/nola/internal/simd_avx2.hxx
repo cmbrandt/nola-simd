@@ -3,7 +3,7 @@
 #ifndef NOLA_AVX2_HXX
 #define NOLA_AVX2_HXX
 
-#include <cstdint> // std::int32_t
+#include <cstdint>
 #include <immintrin.h>
 
 
@@ -41,7 +41,6 @@ inline auto avx2_set_scalar(Real a);
 //
 // Single precision
 
-//inline auto avx2_set_scalar(float a);
 inline v256f avx2_broadcast(float const* addr);
 inline v256f avx2_load(float const* addr);
 inline void  avx2_store(float* addr, v256f a);
@@ -56,7 +55,6 @@ inline float avx2_reduce(v256f a);
 //
 // Double precision
 
-//inline auto avx2_set_scalar(double a);
 inline v256d  avx2_broadcast(double const* addr);
 inline v256d  avx2_load(double const* addr);
 inline void   avx2_store(double* addr, v256d a);

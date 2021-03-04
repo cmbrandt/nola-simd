@@ -3,7 +3,7 @@
 #ifndef NOLA_AVX512_HXX
 #define NOLA_AVX512_HXX
 
-#include <cstdint> // std::int32_t
+#include <cstdint>
 #include <immintrin.h>
 
 

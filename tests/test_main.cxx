@@ -2,10 +2,10 @@
 // All rights reserved
 
 #include <iostream>
-#include <avx2_float.hxx>
-#include <avx2_double.hxx>
-#include <avx512_float.hxx>
-#include <avx512_double.hxx>
+#include <test_avx2_float.hxx>
+#include <test_avx2_double.hxx>
+#include <test_avx512_float.hxx>
+#include <test_avx512_double.hxx>
 
 int main()
 {

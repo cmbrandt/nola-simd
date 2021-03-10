@@ -8,7 +8,7 @@
 
 
 //
-// Helper functions used within test_numeric() and test_utility()
+// Helper functions used throughout
 
 template <class I1, class I2>
 bool compare_sequences(I1 first1, I1 last1, I2 first2)

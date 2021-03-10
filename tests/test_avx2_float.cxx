@@ -5,12 +5,12 @@
 #include <vector>
 #include <nola/simd.hxx>
 #include <test_helpers.hxx>
-#include <avx2_float.hxx>
+#include <test_avx2_float.hxx>
 
 
 int test_avx2_float()
 {
-  int fail = 0;
+  int fail{0};
 
   //fail = test_avx2_float_length(fail);
   //fail = test_avx2_float_set_scalar_and_store(fail);
@@ -63,7 +63,7 @@ int test_avx2_float_broadcast(int fail)
 {
   std::vector<float> a(8);
   std::vector<float> soln(8, 5);
-  float s = 5.5;
+  float s{5.5};
 
   auto av = nola::simd::avx2_broadcast(&s);
 
@@ -73,7 +73,7 @@ int test_avx2_float_broadcast(int fail)
 
   if (r != false) {
     ++fail;
-    std::cout << "\nERROR! nola::simd::avxw_broadcast()" << std::endl;
+    std::cout << "\nERROR! nola::simd::avx2_broadcast()" << std::endl;
     print_sequence( "a",    a.begin(),    a.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
   }

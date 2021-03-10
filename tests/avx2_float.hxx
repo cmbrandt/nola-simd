@@ -6,11 +6,10 @@
 
 
 int test_avx2_float_length(int);
-int test_avx2_float_set_scalar(int);
+int test_avx2_float_set_scalar_and_store(int);
 int test_avx2_float_set_zero(int);
 int test_avx2_float_broadcast(int);
 int test_avx2_float_load(int);
-int test_avx2_float_store(int);
 int test_avx2_float_add(int);
 int test_avx2_float_sub(int);
 int test_avx2_float_mul(int);

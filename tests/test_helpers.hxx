@@ -14,7 +14,8 @@
 template <class I1, class I2>
 bool compare_sequences(I1 first1, I1 last1, I2 first2)
 {
-  using T = std::common_type_t<typename I1::value_type, typename I2::value_type>;
+  using T =
+    std::common_type_t<typename I1::value_type, typename I2::value_type>;
 
   bool flag{false};
 

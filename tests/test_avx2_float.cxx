@@ -62,7 +62,7 @@ int test_avx2_float_set_zero(int fail)
 int test_avx2_float_broadcast(int fail)
 {
   std::vector<float> a(8);
-  std::vector<float> soln(8, 5);
+  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
   float s{5.5};
 
   auto av = nola::simd::avx2_broadcast(&s);
@@ -71,7 +71,7 @@ int test_avx2_float_broadcast(int fail)
 
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
-  if (r != false) {
+  if (r == true) {
     ++fail;
     std::cout << "\nERROR! nola::simd::avx2_broadcast()" << std::endl;
     print_sequence( "a",    a.begin(),    a.end()    );
@@ -85,6 +85,22 @@ int test_avx2_float_broadcast(int fail)
 
 int test_avx2_float_load(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> b(8);
+  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+
+  auto av = nola::simd::avx2_load( a.data() );
+
+  nola::simd::avx2_store( b.data(), av );
+
+  bool r = compare_sequences( b.begin(), b.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_load()" << std::endl;
+    print_sequence( "b",    b.begin(),    b.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }

@@ -5,6 +5,7 @@
 #define NOLA_TEST_HELPERS_HXX
 
 #include <string_view>
+#include <type_traits>
 
 
 //
@@ -13,21 +14,18 @@
 template <class I1, class I2>
 bool compare_sequences(I1 first1, I1 last1, I2 first2)
 {
-  using T = decltype(first1 - first2);
+  using T = std::common_type_t<typename I1::value_type, typename I2::value_type>;
 
-  int count{0};
+  bool flag{false};
 
   for (; first1 != last1; ++first1, ++first2) {
     T diff = (*first1) - (*first2);
 
     if ( std::abs(diff) > T{0} )
-      ++count;
+      flag = true;
   }
 
-  if (count > 0)
-    return true;
-  else
-    return false; 
+  return flag;
 }
 
 

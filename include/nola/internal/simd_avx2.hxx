@@ -35,13 +35,11 @@ inline std::int32_t avx2_length();
 template <class Real>
 inline auto avx2_set_zero();
 
-template <class Real>
-inline auto avx2_set_scalar(Real a);
-
 
 //
 // Single precision
 
+inline v256f avx2_set_scalar(float a);
 inline v256f avx2_broadcast(float const* addr);
 inline v256f avx2_load(float const* addr);
 inline void  avx2_store(float* addr, v256f a);
@@ -50,12 +48,13 @@ inline v256f avx2_sub(v256f a, v256f b);
 inline v256f avx2_mul(v256f a, v256f b);
 inline v256f avx2_div(v256f a, v256f b);
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
-inline float avx2_reduce(v256f a);
+//inline float avx2_reduce(v256f a);
 
 
 //
 // Double precision
 
+inline v256d  avx2_set_scalar(double a);
 inline v256d  avx2_broadcast(double const* addr);
 inline v256d  avx2_load(double const* addr);
 inline void   avx2_store(double* addr, v256d a);
@@ -68,44 +67,81 @@ inline double avx2_reduce(v256d a);
 
 
 //----------------------------------------------------------------------------//
+// Helper classes
+
+namespace detail
+{
+
+//
+// avx2_length
+
+template <class Real>
+struct simd_mm256_length {
+  // static std::int32_t
+  // mm256_length();
+};
+
+template <>
+struct simd_mm256_length<float> {
+  static std::int32_t
+  mm256_length() { return std::integral_constant<std::int32_t, 8>(); }
+};
+
+template <>
+struct simd_mm256_length<double> {
+  static std::int32_t
+  mm256_length() { return std::integral_constant<std::int32_t, 4>(); }
+};
+
+
+
+//
+// avx2_set_zero
+
+template <class Real>
+struct simd_mm256_setzero {
+  // static auto
+  // mm256_setzero();
+};
+
+template <>
+struct simd_mm256_setzero<float> {
+  static auto
+  mm256_setzero() { return _mm256_setzero_ps(); }
+};
+
+template <>
+struct simd_mm256_setzero<double> {
+  static auto
+  mm256_setzero() { return _mm256_setzero_pd(); }
+};
+
+} //namespace detail
+
+
+
+//----------------------------------------------------------------------------//
 // Definitions
 
 
 //
 // Generic
 
-template <>
-constexpr std::int32_t
-avx2_length<float>()  { return 8; }
+template <class Real>
+inline std::int32_t
+avx2_length() { return detail::simd_mm256_length<Real>::mm256_length(); }
 
-template <>
-constexpr std::int32_t
-avx2_length<double>() { return 4; }
-
-
-template <>
+template <class Real>
 inline auto
-avx2_set_zero<float>()  { return _mm256_setzero_ps(); }
+avx2_set_zero() { return detail::simd_mm256_setzero<Real>::mm256_setzero(); }
 
-template <>
-inline auto
-avx2_set_zero<double>() { return _mm256_setzero_pd(); }
-
-
-template <>
-inline auto
-avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
-
-template <>
-inline auto
-avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
 
 //
 // Single precision
 
-//inline v256f
-//avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
+inline v256f
+avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
 
 inline v256f
 avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
@@ -121,9 +157,30 @@ avx2_add(v256f a, v256f b) { return _mm256_add_ps(a, b); }
 
 inline v256f 
 avx2_sub(v256f a, v256f b) { return _mm256_sub_ps(a, b); }
- 
-//inline v256d
-//avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
+
+inline v256f
+avx2_mul(v256f a, v256f b) { return _mm256_mul_ps(a, b); }
+
+inline v256f
+avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
+
+inline v256f
+avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
+
+// TODO: Implementing this routine.
+//inline float
+//avx2_reduce(v256f a)
+//{
+//  return 5;
+//}
+
+
+
+//
+// Double precision
+
+inline v256d
+avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
 inline v256d
 avx2_set_zero() { return _mm256_setzero_pd(); }

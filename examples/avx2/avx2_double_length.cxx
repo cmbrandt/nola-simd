@@ -10,7 +10,7 @@ int main()
   std::cout << "\nSIMD AVX2 Double Length Example." << std::endl;
 
   // Compute length of SIMD object
-  constexpr std::int32_t l = nola::simd::avx2_length<double>();
+  /*constexpr*/ std::int32_t l = nola::simd::avx2_length<double>();
 
   // Display result
   std::cout << "\nlength = " << l << std::endl; // l = 4

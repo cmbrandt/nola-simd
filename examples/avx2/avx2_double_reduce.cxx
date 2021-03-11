@@ -11,7 +11,7 @@ int main()
   std::cout << "\nSIMD AVX2 Double Reduce Example." << std::endl;
 
   // Input data
-  std::vector<double> a{ 1.1, 2.3, 3.5, 4.9 }; //5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> a{ 1.1, 4.9, 2.3, 3.5 };
 
   // Define SIMD object using input data
   auto av = nola::simd::avx2_load( a.data() );
@@ -20,5 +20,5 @@ int main()
   float r = nola::simd::avx2_reduce(av);
 
   // Display result
-  std::cout << "\nr = " << r << std::endl; // r = 22
+  std::cout << "\nr = " << r << std::endl; // r = 11.8
 }

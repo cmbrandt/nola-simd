@@ -31,7 +31,7 @@ int main()
   nola::simd::avx2_store( d.data(), dv );
 
   // Display result
-  nola::util::print_vector("\nvector 'c'", d.size(), d.data(), 3, 4);
+  nola::util::print_vector("\nd", d.size(), d.data(), 3, 4);
 
   // d = [
   //  13.2 13.2 13.2 13.2

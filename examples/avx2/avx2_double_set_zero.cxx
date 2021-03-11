@@ -21,7 +21,7 @@ int main()
   nola::simd::avx2_store( a.data(), av );
 
   // Display result
-  nola::util::print_vector("\nvector 'a'", a.size(), a.data(), 1, 1);
+  nola::util::print_vector("\na", a.size(), a.data(), 1, 1);
 
   // a = [
   //  0 0 0 0

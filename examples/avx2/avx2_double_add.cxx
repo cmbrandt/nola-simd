@@ -29,7 +29,7 @@ int main()
   nola::simd::avx2_store( c.data(), cv );
 
   // Display result
-  nola::util::print_vector("\nvector 'c'", c.size(), c.data(), 2, 3);
+  nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
 
   // c = [
   //  7.7 7.7 7.7 7.7

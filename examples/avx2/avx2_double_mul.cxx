@@ -12,8 +12,8 @@ int main()
   std::cout << "\nSIMD AVX2 Double Multiplication Example." << std::endl;
 
   // Input data
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 }; 
+  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 };
 
   // Container to store solution
   std::vector<double> c(4);

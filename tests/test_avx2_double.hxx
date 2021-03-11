@@ -6,8 +6,8 @@
 
 
 int test_avx2_double_length(int);
+int test_avx2_double_set_zero_and_store(int);
 int test_avx2_double_set_scalar(int);
-int test_avx2_double_set_zero(int);
 int test_avx2_double_broadcast(int);
 int test_avx2_double_load(int);
 int test_avx2_double_store(int);

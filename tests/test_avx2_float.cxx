@@ -12,10 +12,9 @@ int test_avx2_float()
 {
   int fail{0};
 
-  //fail = test_avx2_float_length(fail);
-  //fail = test_avx2_float_set_scalar_and_store(fail);
-  //fail = test_avx2_float_set_zero(fail);
-
+  fail = test_avx2_float_length(fail);
+  fail = test_avx2_float_set_zero_and_store(fail);
+  fail = test_avx2_float_set_scalar(fail);
   fail = test_avx2_float_broadcast(fail);
   fail = test_avx2_float_load(fail);
   fail = test_avx2_float_add(fail);
@@ -34,29 +33,53 @@ int test_avx2_float()
 }
 
 
-/*
+
 int test_avx2_float_length(int fail)
 {
+  std::int32_t r = nola::simd::avx2_length<float>();
+  std::int32_t soln{8};
+
+  if (r != soln) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_length()"
+              << "\nr    = " << r
+              << "\nsoln = " << soln << std::endl;
+  }
 
   return fail;
 }
 
 
 
-int test_avx2_float_set_scalar_and_store(int fail)
+int test_avx2_float_set_zero_and_store(int fail)
+{
+  std::vector<float> a(8);
+  std::vector<float> soln{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+
+  auto av = nola::simd::avx2_set_zero<float>();
+
+  nola::simd::avx2_store( a.data(), av );
+
+  bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_set_zero() / nola::simd::avx2_store()" << std::endl;
+    print_sequence( "a",    a.begin(),    a.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
+
+  return fail;
+}
+
+
+
+int test_avx2_float_set_scalar(int fail)
 {
 
   return fail;
 }
 
-
-
-int test_avx2_float_set_zero(int fail)
-{
-
-  return fail;
-}
-*/
 
 
 int test_avx2_float_broadcast(int fail)

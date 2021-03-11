@@ -12,7 +12,7 @@ int main()
   std::cout << "\nSIMD AVX2 Float Store Example." << std::endl;
 
   // Input data
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
   
   // Container to store solution
   std::vector<float> b(8);

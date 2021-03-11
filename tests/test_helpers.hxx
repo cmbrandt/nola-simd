@@ -6,23 +6,25 @@
 
 #include <string_view>
 #include <type_traits>
-
+#include <iostream>
 
 //
 // Helper functions used throughout
 
-template <class I1, class I2>
-bool compare_sequences(I1 first1, I1 last1, I2 first2)
+template <class I>
+bool compare_sequences(I first1, I last1, I first2)
 {
-  using T =
-    std::common_type_t<typename I1::value_type, typename I2::value_type>;
+  using T = typename I::value_type;
+
+  T eps = std::numeric_limits<T>::epsilon();
+  T tol = eps * 10;
 
   bool flag{false};
 
   for (; first1 != last1; ++first1, ++first2) {
     T diff = (*first1) - (*first2);
 
-    if ( std::abs(diff) > T{0} )
+    if ( std::abs(diff) > tol )
       flag = true;
   }
 

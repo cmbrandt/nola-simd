@@ -76,6 +76,21 @@ int test_avx2_float_set_zero_and_store(int fail)
 
 int test_avx2_float_set_scalar(int fail)
 {
+  std::vector<float> a(8);
+  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+
+  auto av = nola::simd::avx2_set_scalar(5.5f);
+
+  nola::simd::avx2_store( a.data(), av );
+
+  bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_set_scalar()" << std::endl;
+    print_sequence( "a",    a.begin(),    a.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
@@ -132,6 +147,27 @@ int test_avx2_float_load(int fail)
 
 int test_avx2_float_add(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
+  std::vector<float> soln{ 7.7, 7.7, 7.7, 7.7, 7.7, 7.7, 7.7, 7.7 };
+
+  std::vector<float> c(8);
+
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+
+  auto cv = nola::simd::avx2_add(av, bv);
+
+  nola::simd::avx2_store( c.data(), cv );
+
+  bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_add()" << std::endl;
+    print_sequence( "c",    c.begin(),    c.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
@@ -140,6 +176,27 @@ int test_avx2_float_add(int fail)
 
 int test_avx2_float_sub(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
+  std::vector<float> soln{ 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3 };
+
+  std::vector<float> c(8);
+
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+
+  auto cv = nola::simd::avx2_sub(av, bv);
+
+  nola::simd::avx2_store( c.data(), cv );
+
+  bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_sub()" << std::endl;
+    print_sequence( "c",    c.begin(),    c.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
@@ -148,6 +205,27 @@ int test_avx2_float_sub(int fail)
 
 int test_avx2_float_mul(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
+  std::vector<float> soln{ 12.1, 12.1, 12.1, 12.1, 12.1, 12.1, 12.1, 12.1 };
+
+  std::vector<float> c(8);
+
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+
+  auto cv = nola::simd::avx2_mul(av, bv);
+
+  nola::simd::avx2_store( c.data(), cv );
+
+  bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_mul()" << std::endl;
+    print_sequence( "c",    c.begin(),    c.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
@@ -156,6 +234,27 @@ int test_avx2_float_mul(int fail)
 
 int test_avx2_float_div(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
+  std::vector<float> soln{ 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5 };
+
+  std::vector<float> c(8);
+
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+
+  auto cv = nola::simd::avx2_div(av, bv);
+
+  nola::simd::avx2_store( c.data(), cv );
+
+  bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_div()" << std::endl;
+    print_sequence( "c",    c.begin(),    c.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
@@ -164,12 +263,35 @@ int test_avx2_float_div(int fail)
 
 int test_avx2_float_fma(int fail)
 {
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 };
+  std::vector<float> c{ 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 };
+  std::vector<float> soln{ 13.2, 13.2, 13.2, 13.2, 13.2, 13.2, 13.2, 13.2 };
+
+  std::vector<float> d(8);
+
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+  auto cv = nola::simd::avx2_load( c.data() );
+
+  auto dv = nola::simd::avx2_fma(av, bv, cv);
+
+  nola::simd::avx2_store( d.data(), dv );
+
+  bool r = compare_sequences( d.begin(), d.end(), soln.begin() );
+
+  if (r == true) {
+    ++fail;
+    std::cout << "\nERROR! nola::simd::avx2_fma()" << std::endl;
+    print_sequence( "d",    d.begin(),    d.end()    );
+    print_sequence( "soln", soln.begin(), soln.end() );
+  }
 
   return fail;
 }
 
 
-
+// TODO: Complete this test after finishing the avx2_reduce<float> impl.
 int test_avx2_float_reduce(int fail)
 {
 

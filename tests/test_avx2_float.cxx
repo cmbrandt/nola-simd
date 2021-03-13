@@ -25,9 +25,9 @@ int test_avx2_float()
   fail += test_avx2_float_reduce();
 
   if (fail == 0)
-    std::cout << "\ntest_avx2_float()  passed with zero errors." << std::endl;
+    std::cout << "\ntest_avx2_float()    passed with zero errors." << std::endl;
   else
-    std::cout << "\ntest_avx2_float()  had " << fail << " errors." << std::endl;
+    std::cout << "\ntest_avx2_float()    had " << fail << " errors." << std::endl;
 
   return fail;
 }

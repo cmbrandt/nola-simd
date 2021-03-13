@@ -4,7 +4,7 @@ CXX      := g++-10
 CXXFLAGS := -Wall -Wpedantic -Wextra -std=c++20 -mavx2 -mavx512f -mfma
 CXXTESTS := -I $(HOME)/projects/nola-simd/tests
 CXXINCLD := -I $(HOME)/projects/nola-simd/include
-CXXOBJTS := test_main.o test_avx2_float.o
+CXXOBJTS := test_main.o test_avx2_float.o test_avx2_double.o
 
 
 all: test.exe
@@ -19,6 +19,9 @@ test_main.o: test_main.cxx
 
 test_avx2_float.o: test_avx2_float.cxx
 	$(CXX) $(CXXFLAGS) $(CXXTESTS) $(CXXINCLD) -c test_avx2_float.cxx
+
+test_avx2_double.o: test_avx2_double.cxx
+	$(CXX) $(CXXFLAGS) $(CXXTESTS) $(CXXINCLD) -c test_avx2_double.cxx
 
 
 run: test.exe

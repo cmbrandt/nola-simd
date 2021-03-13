@@ -7,11 +7,11 @@
 
 int main()
 {
-  std::cout << "\nSIMD AVX2 Float Length Example." << std::endl;
+  std::cout << "\nSIMD AVX2 Float Width Example." << std::endl;
 
   // Compute length of SIMD object
-  /*constexpr*/ std::int32_t l = nola::simd::avx2_length<float>();
+  /*constexpr*/ std::int32_t w = nola::simd::avx2_width<float>();
 
   // Display result
-  std::cout << "\nlength = " << l << std::endl; // l = 8
+  std::cout << "\nwidth = " << w << std::endl; // w = 8
 }

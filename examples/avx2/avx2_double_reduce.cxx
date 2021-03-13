@@ -17,7 +17,7 @@ int main()
   auto av = nola::simd::avx2_load( a.data() );
 
   // Compute sum of all elements in SIMD object
-  float r = nola::simd::avx2_reduce(av);
+  double r = nola::simd::avx2_reduce(av);
 
   // Display result
   std::cout << "\nr = " << r << std::endl; // r = 11.8

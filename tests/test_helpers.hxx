@@ -19,7 +19,7 @@ bool compare_sequences(I first1, I last1, I first2)
   T eps = std::numeric_limits<T>::epsilon();
   T tol = eps * 10;
 
-  bool flag{false};
+  bool flag{false}; // chosen to be equivalent to int{0}
 
   for (; first1 != last1; ++first1, ++first2) {
     T diff = (*first1) - (*first2);

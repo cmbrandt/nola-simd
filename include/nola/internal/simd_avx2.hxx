@@ -29,10 +29,10 @@ using v256d = __m256d;
 //
 // Generic
 
-template <class Real>
-inline std::int32_t avx2_length();
+template <class Real> //<Real R>
+inline std::int32_t avx2_length(); // change 'length' to 'width' ??
 
-template <class Real>
+template <class Real> // Real R>
 inline auto avx2_set_zero();
 
 
@@ -75,7 +75,7 @@ namespace detail
 //
 // avx2_length
 
-template <class Real>
+template <class Real> // <Real R>
 struct simd_mm256_length {
   // static std::int32_t
   // mm256_length();
@@ -84,13 +84,13 @@ struct simd_mm256_length {
 template <>
 struct simd_mm256_length<float> {
   static std::int32_t
-  mm256_length() { return std::integral_constant<std::int32_t, 8>(); }
+  mm256_length() { return std::int32_t{8}; }
 };
 
 template <>
 struct simd_mm256_length<double> {
   static std::int32_t
-  mm256_length() { return std::integral_constant<std::int32_t, 4>(); }
+  mm256_length() { return std::int32_t{4}; }
 };
 
 
@@ -98,7 +98,7 @@ struct simd_mm256_length<double> {
 //
 // avx2_set_zero
 
-template <class Real>
+template <class Real> // <Real R>
 struct simd_mm256_setzero {
   // static auto
   // mm256_setzero();
@@ -127,11 +127,11 @@ struct simd_mm256_setzero<double> {
 //
 // Generic
 
-template <class Real>
+template <class Real> // <Real R>
 inline std::int32_t
 avx2_length() { return detail::simd_mm256_length<Real>::mm256_length(); }
 
-template <class Real>
+template <class Real> // <Real R>
 inline auto
 avx2_set_zero() { return detail::simd_mm256_setzero<Real>::mm256_setzero(); }
 
@@ -167,12 +167,12 @@ avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
 
-// TODO: Implementing this routine.
-//inline float
-//avx2_reduce(v256f a)
-//{
-//  return 5;
-//}
+// TODO: Implement this routine.
+// inline float
+// avx2_reduce(v256f a)
+// {
+//   return 5;
+// }
 
 
 

@@ -68,38 +68,73 @@ inline double avx512_reduce(v512d a);
 
 
 //----------------------------------------------------------------------------//
+// Helper classes
+
+namespace detail
+{
+
+//
+// avx2_length
+
+template <class Real> // <Real R>
+struct simd_mm512_length {
+  // static std::int32_t
+  // mm512_length();
+};
+
+template <>
+struct simd_mm512_length<float> {
+  static std::int32_t
+  mm512_length() { return std::int32_t{16}; }
+};
+
+template <>
+struct simd_mm512_length<double> {
+  static std::int32_t
+  mm512_length() { return std::int32_t{8}; }
+};
+
+
+
+//
+// avx2_set_zero
+
+template <class Real> // <Real R>
+struct simd_mm512_setzero {
+  // static auto
+  // mm512_setzero();
+};
+
+template <>
+struct simd_mm512_setzero<float> {
+  static auto
+  mm512_setzero() { return _mm512_setzero_ps(); }
+};
+
+template <>
+struct simd_mm512_setzero<double> {
+  static auto
+  mm512_setzero() { return _mm512_setzero_pd(); }
+};
+
+} //namespace detail
+
+
+
+//----------------------------------------------------------------------------//
 // Definitions
 
 
 //
 // Generic
 
+template <class Real> // <Real R>
+inline std::int32_t
+avx512_length() { return detail::simd_mm512_length<Real>::mm512_length(); }
 
-template <>
-constexpr std::int32_t
-avx512_length<float>()  { return 16; }
-
-template <>
-constexpr std::int32_t
-avx512_length<double>() { return 8; }
-
-
-template <>
+template <class Real> // <Real R>
 inline auto
-avx512_set_scalar(float a)  { return _mm512_set1_ps(a); }
-
-template <>
-inline auto
-avx512_set_scalar(double a) { return _mm512_set1_pd(a); }
-
-
-template <>
-inline auto
-avx512_set_zero<float>()  { return _mm512_setzero_ps(); }
-
-template <>
-inline auto
-avx512_set_zero<double>() { return _mm512_setzero_pd(); }
+avx512_set_zero() { return detail::simd_mm512_setzero<Real>::mm512_setzero(); }
 
 
 //

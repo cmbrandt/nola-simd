@@ -76,21 +76,21 @@ namespace detail
 // avx2_length
 
 template <class Real> // <Real R>
-struct simd_mm256_length {
+struct simd_mm256_width {
   // static std::int32_t
-  // mm256_length();
+  // mm256_width();
 };
 
 template <>
-struct simd_mm256_length<float> {
+struct simd_mm256_width<float> {
   static std::int32_t
-  mm256_length() { return std::int32_t{8}; }
+  mm256_width() { return std::int32_t{8}; }
 };
 
 template <>
-struct simd_mm256_length<double> {
+struct simd_mm256_width<double> {
   static std::int32_t
-  mm256_length() { return std::int32_t{4}; }
+  mm256_width() { return std::int32_t{4}; }
 };
 
 
@@ -129,7 +129,7 @@ struct simd_mm256_setzero<double> {
 
 template <class Real> // <Real R>
 inline std::int32_t
-avx2_length() { return detail::simd_mm256_length<Real>::mm256_length(); }
+avx2_width() { return detail::simd_mm256_width<Real>::mm256_width(); }
 
 template <class Real> // <Real R>
 inline auto
@@ -167,12 +167,19 @@ avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
 
-// TODO: Implement this routine.
-// inline float
-// avx2_reduce(v256f a)
-// {
-//   return 5;
-// }
+// TODO: Proper implemention for this routine.
+inline float
+avx2_reduce(v256f a)
+{
+  float arr[8];
+  _mm256_storeu_ps(&arr[0], a);
+
+  float sum{0};
+  for (int i = 0; i < 8; ++i)
+    sum += arr[i];
+
+  return sum;
+}
 
 
 

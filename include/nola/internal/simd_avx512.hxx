@@ -30,7 +30,7 @@ using v512d = __m512d;
 // Generic
 
 template <class Real>
-inline std::int32_t avx512_length();
+inline std::int32_t avx512_width();
 
 template <class Real>
 inline auto avx512_set_scalar(Real a);
@@ -77,21 +77,21 @@ namespace detail
 // avx2_length
 
 template <class Real> // <Real R>
-struct simd_mm512_length {
+struct simd_mm512_width {
   // static std::int32_t
-  // mm512_length();
+  // mm512_width();
 };
 
 template <>
-struct simd_mm512_length<float> {
+struct simd_mm512_width<float> {
   static std::int32_t
-  mm512_length() { return std::int32_t{16}; }
+  mm512_width() { return std::int32_t{16}; }
 };
 
 template <>
-struct simd_mm512_length<double> {
+struct simd_mm512_width<double> {
   static std::int32_t
-  mm512_length() { return std::int32_t{8}; }
+  mm512_width() { return std::int32_t{8}; }
 };
 
 
@@ -130,7 +130,7 @@ struct simd_mm512_setzero<double> {
 
 template <class Real> // <Real R>
 inline std::int32_t
-avx512_length() { return detail::simd_mm512_length<Real>::mm512_length(); }
+avx512_width() { return detail::simd_mm512_width<Real>::mm512_width(); }
 
 template <class Real> // <Real R>
 inline auto

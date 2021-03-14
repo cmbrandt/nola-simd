@@ -145,9 +145,8 @@ int test_avx2_float_add()
 {
   std::vector<float> a(8, 5.5);
   std::vector<float> b(8, 2.2);
-  std::vector<float> soln(8, 7.7);
-
   std::vector<float> c(8);
+  std::vector<float> soln(8, 7.7);
 
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
@@ -173,9 +172,8 @@ int test_avx2_float_sub()
 {
   std::vector<float> a(8, 5.5);
   std::vector<float> b(8, 2.2);
-  std::vector<float> soln(8, 3.3);
-
   std::vector<float> c(8);
+  std::vector<float> soln(8, 3.3);
 
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
@@ -201,9 +199,8 @@ int test_avx2_float_mul()
 {
   std::vector<float> a(8, 5.5);
   std::vector<float> b(8, 2.2);
-  std::vector<float> soln(8, 12.1);
-
   std::vector<float> c(8);
+  std::vector<float> soln(8, 12.1);
 
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
@@ -229,9 +226,8 @@ int test_avx2_float_div()
 {
   std::vector<float> a(8, 5.5);
   std::vector<float> b(8, 2.2);
-  std::vector<float> soln(8, 2.5);
-
   std::vector<float> c(8);
+  std::vector<float> soln(8, 2.5);
 
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
@@ -258,9 +254,8 @@ int test_avx2_float_fma()
   std::vector<float> a(8, 5.5);
   std::vector<float> b(8, 2.2);
   std::vector<float> c(8, 1.1);
-  std::vector<float> soln(8, 13.2);
-
   std::vector<float> d(8);
+  std::vector<float> soln(8, 13.2);
 
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );

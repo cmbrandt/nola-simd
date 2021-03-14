@@ -10,9 +10,11 @@
 
 int test_avx2_float()
 {
+  std::cout << "\ntest_avx2_float()" << std::endl;
+
   int fail{0};
 
-  fail += test_avx2_float_length();
+  fail += test_avx2_float_width();
   fail += test_avx2_float_set_zero_and_store();
   fail += test_avx2_float_set_scalar();
   fail += test_avx2_float_broadcast();
@@ -25,7 +27,7 @@ int test_avx2_float()
   fail += test_avx2_float_reduce();
 
   if (fail == 0)
-    std::cout << "\ntest_avx2_float()    passed with zero errors." << std::endl;
+    std::cout << "test_avx2_float()    passed with zero errors." << std::endl;
   else
     std::cout << "\ntest_avx2_float()    had " << fail << " errors." << std::endl;
 
@@ -33,14 +35,13 @@ int test_avx2_float()
 }
 
 
-
-int test_avx2_float_length()
+int test_avx2_float_width()
 {
-  std::int32_t r = nola::simd::avx2_length<float>();
+  std::int32_t r = nola::simd::avx2_width<float>();
   std::int32_t soln{8};
 
   if (r != soln) {
-    std::cout << "\nERROR! nola::simd::avx2_length()"
+    std::cout << "\nERROR! test_avx2_float_width()"
               << "\nr    = " << r
               << "\nsoln = " << soln << std::endl;
     return 1;
@@ -48,7 +49,6 @@ int test_avx2_float_length()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_set_zero_and_store()
@@ -63,7 +63,7 @@ int test_avx2_float_set_zero_and_store()
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_set_zero() / nola::simd::avx2_store()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_set_zero_and_store()" << std::endl;
     print_sequence( "a",    a.begin(),    a.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -71,7 +71,6 @@ int test_avx2_float_set_zero_and_store()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_set_scalar()
@@ -86,7 +85,7 @@ int test_avx2_float_set_scalar()
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_set_scalar()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_set_scalar()" << std::endl;
     print_sequence( "a",    a.begin(),    a.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -94,7 +93,6 @@ int test_avx2_float_set_scalar()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_broadcast()
@@ -110,7 +108,7 @@ int test_avx2_float_broadcast()
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_broadcast()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_broadcast()" << std::endl;
     print_sequence( "a",    a.begin(),    a.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -118,7 +116,6 @@ int test_avx2_float_broadcast()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_load()
@@ -134,7 +131,7 @@ int test_avx2_float_load()
   bool r = compare_sequences( b.begin(), b.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_load()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_load()" << std::endl;
     print_sequence( "b",    b.begin(),    b.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -142,7 +139,6 @@ int test_avx2_float_load()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_add()
@@ -163,7 +159,7 @@ int test_avx2_float_add()
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_add()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_add()" << std::endl;
     print_sequence( "c",    c.begin(),    c.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -171,7 +167,6 @@ int test_avx2_float_add()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_sub()
@@ -192,7 +187,7 @@ int test_avx2_float_sub()
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_sub()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_sub()" << std::endl;
     print_sequence( "c",    c.begin(),    c.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -200,7 +195,6 @@ int test_avx2_float_sub()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_mul()
@@ -221,7 +215,7 @@ int test_avx2_float_mul()
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_mul()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_mul()" << std::endl;
     print_sequence( "c",    c.begin(),    c.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -229,7 +223,6 @@ int test_avx2_float_mul()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_div()
@@ -250,7 +243,7 @@ int test_avx2_float_div()
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_div()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_div()" << std::endl;
     print_sequence( "c",    c.begin(),    c.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -258,7 +251,6 @@ int test_avx2_float_div()
   else
     return 0;
 }
-
 
 
 int test_avx2_float_fma()
@@ -281,7 +273,7 @@ int test_avx2_float_fma()
   bool r = compare_sequences( d.begin(), d.end(), soln.begin() );
 
   if (r == true) {
-    std::cout << "\nERROR! nola::simd::avx2_fma()" << std::endl;
+    std::cout << "\nERROR! test_avx2_float_fma()" << std::endl;
     print_sequence( "d",    d.begin(),    d.end()    );
     print_sequence( "soln", soln.begin(), soln.end() );
     return 1;
@@ -291,10 +283,21 @@ int test_avx2_float_fma()
 }
 
 
-// TODO: Complete this test after finishing the avx2_reduce<float> impl.
 int test_avx2_float_reduce()
 {
+  std::vector<float> a{ 1.1, 4.9, 2.3, 3.5, 5.7, 2.8, 0.6, 8.0 };
+  float soln{28.9};
 
+  auto av = nola::simd::avx2_load( a.data() );
 
-  return 0;
+  float r = nola::simd::avx2_reduce(av);
+
+  if (r != soln) {
+    std::cout << "\nERROR! test_avx2_float_reduce()"
+              << "\nr    = " << r
+              << "\nsoln = " << soln << std::endl;
+    return 1;
+  }
+  else
+    return 0;
 }

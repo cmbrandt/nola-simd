@@ -19,6 +19,7 @@ bar(I x, I y)
 
 int main()
 {
+
   auto r1 = foo(1.,  2. );
   auto r2 = foo(1.1, 2.1);
 

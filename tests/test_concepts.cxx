@@ -17,6 +17,7 @@ I bar(I x, I y)
 
 int main()
 {
+
   nola::Real auto r1 = foo(1.,  2. );
   nola::Real auto r2 = foo(1.1, 2.1);
 

@@ -11,7 +11,7 @@ int main()
 {
   test_avx2_float();
   test_avx2_double();
-  //test_avx512_float();
+  test_avx512_float();
   //test_avx512_double();
 
   std::cout << "\nEnd of test.\n\n\n";

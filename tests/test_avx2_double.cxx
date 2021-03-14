@@ -54,7 +54,7 @@ int test_avx2_double_width()
 int test_avx2_double_set_zero_and_store()
 {
   std::vector<double> a(4);
-  std::vector<double> soln{ 0.0, 0.0, 0.0, 0.0 };
+  std::vector<double> soln(4, 0.0);
 
   auto av = nola::simd::avx2_set_zero<double>();
 
@@ -76,7 +76,7 @@ int test_avx2_double_set_zero_and_store()
 int test_avx2_double_set_scalar()
 {
   std::vector<double> a(4);
-  std::vector<double> soln{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> soln(4, 5.5);
 
   auto av = nola::simd::avx2_set_scalar(5.5);
 
@@ -98,7 +98,7 @@ int test_avx2_double_set_scalar()
 int test_avx2_double_broadcast()
 {
   std::vector<double> a(4);
-  std::vector<double> soln{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> soln(4, 5.5);
   double s{5.5};
 
   auto av = nola::simd::avx2_broadcast(&s);
@@ -120,9 +120,9 @@ int test_avx2_double_broadcast()
 
 int test_avx2_double_load()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> a(4, 5.5);
   std::vector<double> b(4);
-  std::vector<double> soln{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> soln(4, 5.5);
 
   auto av = nola::simd::avx2_load( a.data() );
 
@@ -143,9 +143,9 @@ int test_avx2_double_load()
 
 int test_avx2_double_add()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<double> soln{ 7.7, 7.7, 7.7, 7.7 };
+  std::vector<double> a(4, 5.5);
+  std::vector<double> b(4, 2.2);
+  std::vector<double> soln(4, 7.7);
 
   std::vector<double> c(4);
 
@@ -171,9 +171,9 @@ int test_avx2_double_add()
 
 int test_avx2_double_sub()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<double> soln{ 3.3, 3.3, 3.3, 3.3 };
+  std::vector<double> a(4, 5.5);
+  std::vector<double> b(4, 2.2);
+  std::vector<double> soln(4, 3.3);
 
   std::vector<double> c(4);
 
@@ -199,9 +199,9 @@ int test_avx2_double_sub()
 
 int test_avx2_double_mul()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<double> soln{ 12.1, 12.1, 12.1, 12.1 };
+  std::vector<double> a(4, 5.5);
+  std::vector<double> b(4, 2.2);
+  std::vector<double> soln(4, 12.1);
 
   std::vector<double> c(4);
 
@@ -227,9 +227,9 @@ int test_avx2_double_mul()
 
 int test_avx2_double_div()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 };  
-  std::vector<double> soln{ 2.5, 2.5, 2.5, 2.5 };
+  std::vector<double> a(4, 5.5);
+  std::vector<double> b(4, 2.2);
+  std::vector<double> soln(4, 2.5);
 
   std::vector<double> c(4);
 
@@ -255,10 +255,10 @@ int test_avx2_double_div()
 
 int test_avx2_double_fma()
 {
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<double> c{ 1.1, 1.1, 1.1, 1.1 };
-  std::vector<double> soln{ 13.2, 13.2, 13.2, 13.2 };
+  std::vector<double> a(4, 5.5);
+  std::vector<double> b(4, 2.2);
+  std::vector<double> c(4, 1.1);
+  std::vector<double> soln(4, 13.2);
 
   std::vector<double> d(4);
 

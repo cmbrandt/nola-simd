@@ -5,6 +5,8 @@
 #define NOLA_SIMD_TEST_AVX512_DOUBLE_HXX
 
 
+int test_avx512_double();
+
 int test_avx512_double_length(int);
 int test_avx512_double_set_scalar(int);
 int test_avx512_double_set_zero(int);
@@ -17,8 +19,6 @@ int test_avx512_double_mul(int);
 int test_avx512_double_div(int);
 int test_avx512_double_fma(int);
 int test_avx512_double_reduce(int);
-
-int test_avx512_double();
 
 
 #endif

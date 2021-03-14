@@ -54,7 +54,7 @@ int test_avx2_float_width()
 int test_avx2_float_set_zero_and_store()
 {
   std::vector<float> a(8);
-  std::vector<float> soln{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  std::vector<float> soln(8, 0.0);
 
   auto av = nola::simd::avx2_set_zero<float>();
 
@@ -76,7 +76,7 @@ int test_avx2_float_set_zero_and_store()
 int test_avx2_float_set_scalar()
 {
   std::vector<float> a(8);
-  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> soln(8, 5.5);
 
   auto av = nola::simd::avx2_set_scalar(5.5f);
 
@@ -98,7 +98,7 @@ int test_avx2_float_set_scalar()
 int test_avx2_float_broadcast()
 {
   std::vector<float> a(8);
-  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> soln(8, 5.5);
   float s{5.5};
 
   auto av = nola::simd::avx2_broadcast(&s);
@@ -120,9 +120,9 @@ int test_avx2_float_broadcast()
 
 int test_avx2_float_load()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> a(8, 5.5);
   std::vector<float> b(8);
-  std::vector<float> soln{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> soln(8, 5.5);
 
   auto av = nola::simd::avx2_load( a.data() );
 
@@ -143,9 +143,9 @@ int test_avx2_float_load()
 
 int test_avx2_float_add()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<float> soln{ 7.7, 7.7, 7.7, 7.7, 7.7, 7.7, 7.7, 7.7 };
+  std::vector<float> a(8, 5.5);
+  std::vector<float> b(8, 2.2);
+  std::vector<float> soln(8, 7.7);
 
   std::vector<float> c(8);
 
@@ -171,9 +171,9 @@ int test_avx2_float_add()
 
 int test_avx2_float_sub()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<float> soln{ 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3 };
+  std::vector<float> a(8, 5.5);
+  std::vector<float> b(8, 2.2);
+  std::vector<float> soln(8, 3.3);
 
   std::vector<float> c(8);
 
@@ -199,9 +199,9 @@ int test_avx2_float_sub()
 
 int test_avx2_float_mul()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<float> soln{ 12.1, 12.1, 12.1, 12.1, 12.1, 12.1, 12.1, 12.1 };
+  std::vector<float> a(8, 5.5);
+  std::vector<float> b(8, 2.2);
+  std::vector<float> soln(8, 12.1);
 
   std::vector<float> c(8);
 
@@ -227,9 +227,9 @@ int test_avx2_float_mul()
 
 int test_avx2_float_div()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
-  std::vector<float> soln{ 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5 };
+  std::vector<float> a(8, 5.5);
+  std::vector<float> b(8, 2.2);
+  std::vector<float> soln(8, 2.5);
 
   std::vector<float> c(8);
 
@@ -255,10 +255,10 @@ int test_avx2_float_div()
 
 int test_avx2_float_fma()
 {
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 };
-  std::vector<float> c{ 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1 };
-  std::vector<float> soln{ 13.2, 13.2, 13.2, 13.2, 13.2, 13.2, 13.2, 13.2 };
+  std::vector<float> a(8, 5.5);
+  std::vector<float> b(8, 2.2);
+  std::vector<float> c(8, 1.1);
+  std::vector<float> soln(8, 13.2);
 
   std::vector<float> d(8);
 

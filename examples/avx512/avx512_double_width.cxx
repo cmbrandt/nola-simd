@@ -2,16 +2,16 @@
 // All rights reserved
 
 #include <iostream>
-#include <nola/cxx17/simd.hxx>
+#include <nola/simd.hxx>
 
 
 int main()
 {
-  std::cout << "\nSIMD AVX512 Double Length Example." << std::endl;
+  std::cout << "\nSIMD AVX512 Double Width Example." << std::endl;
 
   // Compute length of SIMD object
-  constexpr std::int32_t l = nola::simd::avx512_length<double>();
+  /*constexpr*/ std::int32_t w = nola::simd::avx512_width<double>();
 
   // Display result
-  std::cout << "\nlength = " << l << std::endl; // l = 8
+  std::cout << "\nwidth = " << w << std::endl; // w = 8
 }

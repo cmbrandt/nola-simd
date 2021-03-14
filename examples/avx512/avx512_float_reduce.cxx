@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <nola/cxx17/simd.hxx>
+#include <nola/simd.hxx>
 
 
 int main()
@@ -11,8 +11,8 @@ int main()
   std::cout << "\nSIMD AVX512 Float Reduce Example." << std::endl;
 
   // Input data
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5,
-                        5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> a{ 1.1, 4.9, 2.3, 3.5, 5.7, 2.8, 0.6, 8.0,
+                        6.2, 2.5, 4.3, 0.7, 4.8, 3.0, 1.8, 2.1 };
 
   // Define SIMD object using input data
   auto av = nola::simd::avx512_load( a.data() );
@@ -21,5 +21,5 @@ int main()
   float r = nola::simd::avx512_reduce(av);
 
   // Display result
-  std::cout << "\nr = " << r << std::endl; // r = 88
+  std::cout << "\nr = " << r << std::endl; // r = 54.3
 }

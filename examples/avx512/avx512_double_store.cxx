@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <vector>
-#include <nola/cxx17/simd.hxx>
-#include <nola/cxx17/util.hxx>
+#include <nola/simd.hxx>
+#include <nola/util.hxx>
 
 
 int main()
@@ -15,7 +15,7 @@ int main()
   std::vector<double> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
   
   // Container to store solution
-  std::vector<double> b(16);
+  std::vector<double> b(8);
 
   // Define SIMD object using input data
   auto av = nola::simd::avx512_load( a.data() );

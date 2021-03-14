@@ -2,16 +2,16 @@
 // All rights reserved
 
 #include <iostream>
-#include <nola/cxx17/simd.hxx>
+#include <nola/simd.hxx>
 
 
 int main()
 {
-  std::cout << "\nSIMD AVX512 Float Length Example." << std::endl;
+  std::cout << "\nSIMD AVX512 Width Width Example." << std::endl;
 
   // Compute length of SIMD object
-  constexpr std::int32_t l = nola::simd::avx512_length<float>();
+  /*constexpr*/ std::int32_t w = nola::simd::avx512_width<float>();
 
   // Display result
-  std::cout << "\nlength = " << l << std::endl; // l = 16
+  std::cout << "\nwidth = " << w << std::endl; // w = 16
 }

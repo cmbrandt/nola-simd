@@ -36,7 +36,7 @@ namespace detail
 
 template <class T>
 struct is_integer
-  : public nola::detail::is_integer_impl<std::remove_cvref_t<T>> { };
+  : public detail::is_integer_impl<std::remove_cvref_t<T>> { };
 
 
 // nola::is_real
@@ -49,7 +49,7 @@ namespace detail
 
 template <class T>
 struct is_real
-  : public nola::detail::is_real_impl<std::remove_cvref_t<T>> { };
+  : public detail::is_real_impl<std::remove_cvref_t<T>> { };
 
 } // namespace nola
 

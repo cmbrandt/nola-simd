@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <immintrin.h>
+#include <nola/internal/concepts.hxx>
 
 
 namespace nola
@@ -17,7 +18,6 @@ namespace simd
 //----------------------------------------------------------------------------//
 // Type aliases
 
-
 using v256f = __m256;
 using v256d = __m256d;
 
@@ -25,44 +25,40 @@ using v256d = __m256d;
 //----------------------------------------------------------------------------//
 // Declarations
 
+template <Real R>
+inline std::int32_t avx2_width();
 
-//
-// Generic
-
-template <class Real> //<Real R>
-inline std::int32_t avx2_length(); // change 'length' to 'width' ??
-
-template <class Real> // Real R>
+template <Real R>
 inline auto avx2_set_zero();
 
+inline v256f avx2_set_scalar(float  a);
+inline v256d avx2_set_scalar(double a);
 
-//
-// Single precision
+inline v256f avx2_broadcast(float  const* addr);
+inline v256d avx2_broadcast(double const* addr);
 
-inline v256f avx2_set_scalar(float a);
-inline v256f avx2_broadcast(float const* addr);
-inline v256f avx2_load(float const* addr);
-inline void  avx2_store(float* addr, v256f a);
+inline v256f avx2_load(float  const* addr);
+inline v256d avx2_load(double const* addr);
+
+inline void  avx2_store(float*  addr, v256f a);
+inline void  avx2_store(double* addr, v256d a);
+
 inline v256f avx2_add(v256f a, v256f b);
+inline v256d avx2_add(v256d a, v256d b);
+
 inline v256f avx2_sub(v256f a, v256f b);
+inline v256d avx2_sub(v256d a, v256d b);
+
 inline v256f avx2_mul(v256f a, v256f b);
+inline v256d avx2_mul(v256d a, v256d b);
+
 inline v256f avx2_div(v256f a, v256f b);
+inline v256d avx2_div(v256d a, v256d b);
+
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
-//inline float avx2_reduce(v256f a);
+inline v256d avx2_fma(v256d a, v256d b, v256d c);
 
-
-//
-// Double precision
-
-inline v256d  avx2_set_scalar(double a);
-inline v256d  avx2_broadcast(double const* addr);
-inline v256d  avx2_load(double const* addr);
-inline void   avx2_store(double* addr, v256d a);
-inline v256d  avx2_add(v256d a, v256d b);
-inline v256d  avx2_sub(v256d a, v256d b);
-inline v256d  avx2_mul(v256d a, v256d b);
-inline v256d  avx2_div(v256d a, v256d b);
-inline v256d  avx2_fma(v256d a, v256d b, v256d c);
+inline float  avx2_reduce(v256f a);
 inline double avx2_reduce(v256d a);
 
 
@@ -72,10 +68,9 @@ inline double avx2_reduce(v256d a);
 namespace detail
 {
 
-//
-// avx2_length
+// Helper class for avx2_length
 
-template <class Real> // <Real R>
+template <Real R>
 struct simd_mm256_width {
   // static std::int32_t
   // mm256_width();
@@ -83,22 +78,18 @@ struct simd_mm256_width {
 
 template <>
 struct simd_mm256_width<float> {
-  static std::int32_t
-  mm256_width() { return std::int32_t{8}; }
+  static constexpr std::int32_t value{8};
 };
 
 template <>
 struct simd_mm256_width<double> {
-  static std::int32_t
-  mm256_width() { return std::int32_t{4}; }
+  static constexpr std::int32_t value{4};
 };
 
 
+// Helper class for avx2_set_zero
 
-//
-// avx2_set_zero
-
-template <class Real> // <Real R>
+template <Real R>
 struct simd_mm256_setzero {
   // static auto
   // mm256_setzero();
@@ -119,53 +110,72 @@ struct simd_mm256_setzero<double> {
 } //namespace detail
 
 
-
 //----------------------------------------------------------------------------//
 // Definitions
 
-
-//
-// Generic
-
-template <class Real> // <Real R>
+template <Real R>
 inline std::int32_t
-avx2_width() { return detail::simd_mm256_width<Real>::mm256_width(); }
+avx2_width() { return detail::simd_mm256_width<R>::value; }
 
-template <class Real> // <Real R>
+
+template <Real R>
 inline auto
-avx2_set_zero() { return detail::simd_mm256_setzero<Real>::mm256_setzero(); }
+avx2_set_zero() { return detail::simd_mm256_setzero<R>::mm256_setzero(); }
 
-
-
-//
-// Single precision
 
 inline v256f
-avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
+avx2_set_scalar(float  a)  { return _mm256_set1_ps(a); }
+inline v256d
+avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
+
 
 inline v256f
-avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
+avx2_broadcast(float  const* addr) { return _mm256_broadcast_ss(addr); }
+inline v256d
+avx2_broadcast(double const* addr) { return _mm256_broadcast_sd(addr); }
+
 
 inline v256f
-avx2_load(float const* addr) { return _mm256_loadu_ps(addr); }
+avx2_load(float  const* addr) { return _mm256_loadu_ps(addr); }
+inline v256d
+avx2_load(double const* addr) { return _mm256_loadu_pd(addr); }
+
 
 inline void
-avx2_store(float* addr, v256f a) { _mm256_storeu_ps(addr, a); }
+avx2_store(float*  addr, v256f a) { _mm256_storeu_ps(addr, a); }
+inline void
+avx2_store(double* addr, v256d a) { _mm256_storeu_pd(addr, a); }
+
 
 inline v256f
 avx2_add(v256f a, v256f b) { return _mm256_add_ps(a, b); }
+inline v256d
+avx2_add(v256d a, v256d b) { return _mm256_add_pd(a, b); }
+
 
 inline v256f 
 avx2_sub(v256f a, v256f b) { return _mm256_sub_ps(a, b); }
+inline v256d 
+avx2_sub(v256d a, v256d b) { return _mm256_sub_pd(a, b); }
+
 
 inline v256f
 avx2_mul(v256f a, v256f b) { return _mm256_mul_ps(a, b); }
+inline v256d
+avx2_mul(v256d a, v256d b) { return _mm256_mul_pd(a, b); }
+
 
 inline v256f
 avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
+inline v256d
+avx2_div(v256d a, v256d b) { return _mm256_div_pd(a, b); }
+
 
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
+inline v256d
+avx2_fma(v256d a, v256d b, v256d c) { return _mm256_fmadd_pd(a, b, c); }
+
 
 // TODO: Proper implemention for this routine.
 inline float
@@ -180,41 +190,6 @@ avx2_reduce(v256f a)
 
   return sum;
 }
-
-
-
-//
-// Double precision
-
-inline v256d
-avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
-
-inline v256d
-avx2_set_zero() { return _mm256_setzero_pd(); }
-
-inline v256d
-avx2_broadcast(double const* addr) { return _mm256_broadcast_sd(addr); }
-
-inline v256d
-avx2_load(double const* addr) { return _mm256_loadu_pd(addr); }
-
-inline void
-avx2_store(double* addr, v256d a) { _mm256_storeu_pd(addr, a); }
-
-inline v256d
-avx2_add(v256d a, v256d b) { return _mm256_add_pd(a, b); }
-
-inline v256d 
-avx2_sub(v256d a, v256d b) { return _mm256_sub_pd(a, b); }
-
-inline v256d
-avx2_mul(v256d a, v256d b) { return _mm256_mul_pd(a, b); }
-
-inline v256d
-avx2_div(v256d a, v256d b) { return _mm256_div_pd(a, b); }
-
-inline v256d
-avx2_fma(v256d a, v256d b, v256d c) { return _mm256_fmadd_pd(a, b, c); }
 
 inline double
 avx2_reduce(v256d a)

@@ -18,12 +18,14 @@ namespace simd
 //----------------------------------------------------------------------------//
 // Type aliases
 
+
 using v256f = __m256;
 using v256d = __m256d;
 
 
 //----------------------------------------------------------------------------//
 // Declarations
+
 
 template <Real R>
 inline std::int32_t avx2_width();
@@ -65,16 +67,14 @@ inline double avx2_reduce(v256d a);
 //----------------------------------------------------------------------------//
 // Helper classes
 
+
 namespace detail
 {
 
 // Helper class for avx2_length
 
 template <Real R>
-struct simd_mm256_width {
-  // static std::int32_t
-  // mm256_width();
-};
+struct simd_mm256_width;
 
 template <>
 struct simd_mm256_width<float> {
@@ -112,6 +112,7 @@ struct simd_mm256_setzero<double> {
 
 //----------------------------------------------------------------------------//
 // Definitions
+
 
 template <Real R>
 inline std::int32_t

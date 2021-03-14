@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <immintrin.h>
+#include <nola/internal/concepts.hxx>
 
 
 namespace nola
@@ -26,78 +27,67 @@ using v512d = __m512d;
 // Declarations
 
 
-//
-// Generic
-
-template <class Real>
+template <Real R>
 inline std::int32_t avx512_width();
 
-template <class Real>
-inline auto avx512_set_scalar(Real a);
-
-template <class Real>
+template <Real R>
 inline auto avx512_set_zero();
 
+inline v512f avx512_set_scalar(float  a);
+inline v512d avx512_set_scalar(double a);
 
-//
-// Single precision
+inline v512f avx512_broadcast(float  const* addr);
+inline v512d avx512_broadcast(double const* addr);
 
-inline v512f avx512_broadcast(float const* addr);
-inline v512f avx512_load(float const* addr);
-inline void  avx512_store(float* addr, v512f a);
+inline v512f avx512_load(float  const* addr);
+inline v512d avx512_load(double const* addr);
+
+inline void  avx512_store(float*  addr, v512f a);
+inline void  avx512_store(double* addr, v512d a);
+
 inline v512f avx512_add(v512f a, v512f b);
+inline v512d avx512_add(v512d a, v512d b);
+
 inline v512f avx512_sub(v512f a, v512f b);
+inline v512d avx512_sub(v512d a, v512d b);
+
 inline v512f avx512_mul(v512f a, v512f b);
+inline v512d avx512_mul(v512d a, v512d b);
+
 inline v512f avx512_div(v512f a, v512f b);
+inline v512d avx512_div(v512d a, v512d b);
+
 inline v512f avx512_fma(v512f a, v512f b, v512f c);
-inline float avx512_reduce(v512f a);
+inline v512d avx512_fma(v512d a, v512d b, v512d c);
 
-
-//
-// Double precision
-
-inline v512d  avx512_broadcast(double const* addr);
-inline v512d  avx512_load(double const* addr);
-inline void   avx512_store(double* addr, v512d a);
-inline v512d  avx512_add(v512d a, v512d b);
-inline v512d  avx512_sub(v512d a, v512d b);
-inline v512d  avx512_mul(v512d a, v512d b);
-inline v512d  avx512_div(v512d a, v512d b);
-inline v512d  avx512_fma(v512d a, v512d b, v512d c);
+inline float  avx512_reduce(v512f a);
 inline double avx512_reduce(v512d a);
 
 
 //----------------------------------------------------------------------------//
 // Helper classes
 
+
 namespace detail
 {
 
-//
-// avx2_length
+// Helper class for avx512_length
 
-template <class Real> // <Real R>
-struct simd_mm512_width {
-  // static std::int32_t
-  // mm512_width();
-};
+template <Real R>
+struct simd_mm512_width;
 
 template <>
 struct simd_mm512_width<float> {
-  static std::int32_t
-  mm512_width() { return std::int32_t{16}; }
+  static constexpr std::int32_t value{16};
 };
 
 template <>
 struct simd_mm512_width<double> {
-  static std::int32_t
-  mm512_width() { return std::int32_t{8}; }
+  static constexpr std::int32_t value{8};
 };
 
 
-
-//
-// avx2_set_zero
+// Helper class for avx512_set_zero
 
 template <class Real> // <Real R>
 struct simd_mm512_setzero {
@@ -120,25 +110,25 @@ struct simd_mm512_setzero<double> {
 } //namespace detail
 
 
-
 //----------------------------------------------------------------------------//
 // Definitions
 
 
-//
-// Generic
-
-template <class Real> // <Real R>
+template <Real R>
 inline std::int32_t
-avx512_width() { return detail::simd_mm512_width<Real>::mm512_width(); }
+avx512_width() { return detail::simd_mm512_width<R>::value; }
 
-template <class Real> // <Real R>
+
+template <Real R>
 inline auto
-avx512_set_zero() { return detail::simd_mm512_setzero<Real>::mm512_setzero(); }
+avx512_set_zero() { return detail::simd_mm512_setzero<R>::mm512_setzero(); }
 
 
-//
-// Single precision
+inline v512f
+avx512_set_scalar(float  a)  { return _mm512_set1_ps(a); }
+inline v512d
+avx512_set_scalar(double a) { return _mm512_set1_pd(a); }
+
 
 inline v512f
 avx512_broadcast(float const* addr)
@@ -147,37 +137,6 @@ avx512_broadcast(float const* addr)
   return _mm512_broadcastss_ps(a);
 }
 
-inline v512f
-avx512_load(float const* addr) { return _mm512_loadu_ps(addr); }
-
-inline void
-avx512_store(float* addr, v512f a) { _mm512_storeu_ps(addr, a); }
-
-inline v512f
-avx512_add(v512f a, v512f b) { return _mm512_add_ps(a, b); }
-
-inline v512f 
-avx512_sub(v512f a, v512f b) { return _mm512_sub_ps(a, b); }
-
-inline v512f
-avx512_mul(v512f a, v512f b) { return _mm512_mul_ps(a, b); }
-
-inline v512f
-avx512_div(v512f a, v512f b) { return _mm512_div_ps(a, b); }
-
-inline v512f
-avx512_fma(v512f a, v512f b, v512f c) { return _mm512_fmadd_ps(a, b, c); }
-
-inline float
-avx512_reduce(v512f a) { return _mm512_reduce_add_ps(a); }
-
-
-//
-// Double precision
-
-inline v512d
-avx512_set_zero() { return _mm512_setzero_pd(); }
-
 inline v512d
 avx512_broadcast(double const* addr)
 {
@@ -185,27 +144,51 @@ avx512_broadcast(double const* addr)
   return _mm512_broadcastsd_pd(a);
 }
 
+
+inline v512f
+avx512_load(float  const* addr) { return _mm512_loadu_ps(addr); }
 inline v512d
 avx512_load(double const* addr) { return _mm512_loadu_pd(addr); }
 
+
+inline void
+avx512_store(float*  addr, v512f a) { _mm512_storeu_ps(addr, a); }
 inline void
 avx512_store(double* addr, v512d a) { _mm512_storeu_pd(addr, a); }
 
+
+inline v512f
+avx512_add(v512f a, v512f b) { return _mm512_add_ps(a, b); }
 inline v512d
 avx512_add(v512d a, v512d b) { return _mm512_add_pd(a, b); }
 
+
+inline v512f 
+avx512_sub(v512f a, v512f b) { return _mm512_sub_ps(a, b); }
 inline v512d 
 avx512_sub(v512d a, v512d b) { return _mm512_sub_pd(a, b); }
 
+
+inline v512f
+avx512_mul(v512f a, v512f b) { return _mm512_mul_ps(a, b); }
 inline v512d
 avx512_mul(v512d a, v512d b) { return _mm512_mul_pd(a, b); }
 
+
+inline v512f
+avx512_div(v512f a, v512f b) { return _mm512_div_ps(a, b); }
 inline v512d
 avx512_div(v512d a, v512d b) { return _mm512_div_pd(a, b); }
 
+
+inline v512f
+avx512_fma(v512f a, v512f b, v512f c) { return _mm512_fmadd_ps(a, b, c); }
 inline v512d
 avx512_fma(v512d a, v512d b, v512d c) { return _mm512_fmadd_pd(a, b, c); }
 
+
+inline float
+avx512_reduce(v512f a) { return _mm512_reduce_add_ps(a); }
 inline double
 avx512_reduce(v512d a) { return _mm512_reduce_add_pd(a); }
 

@@ -10,7 +10,7 @@ int main()
   std::cout << "\nSIMD AVX2 Float Width Example." << std::endl;
 
   // Compute length of SIMD object
-  /*constexpr*/ std::int32_t w = nola::simd::avx2_width<float>();
+  constexpr std::int32_t w = nola::simd::avx2_width<std::int32_t, float>();
 
   // Display result
   std::cout << "\nwidth = " << w << std::endl; // w = 8

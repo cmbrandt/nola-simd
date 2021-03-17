@@ -19,9 +19,9 @@ int main()
   std::int32_t n = x.size();
 
   // Compute arithmetic mean
-  double m1 = nola::covariance_serial( n, x.data(), y.data() );
-  //double m2 = nola::covariance_avx2(   n, x.data(), y.data() );
-  //double m3 = nola::covariance_avx512( n, x.data(), y.data() );
+  float m1 = nola::covariance_serial( n, x.data(), y.data() );
+  //float m2 = nola::covariance_avx2(   n, x.data(), y.data() );
+  //float m3 = nola::covariance_avx512( n, x.data(), y.data() );
 
   // Display result
   std::cout << "\ncovariance (serial) = " << m1 // m1 = -0.2700

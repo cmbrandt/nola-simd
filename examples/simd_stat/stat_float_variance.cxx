@@ -18,9 +18,9 @@ int main()
   std::int32_t n = x.size();
 
   // Compute arithmetic mean
-  double m1 = nola::variance_serial( n, x.data() );
-  //double m2 = nola::variance_avx2(   n, x.data() );
-  //double m3 = nola::variance_avx512( n, x.data() );
+  float m1 = nola::variance_serial( n, x.data() );
+  //float m2 = nola::variance_avx2(   n, x.data() );
+  //float m3 = nola::variance_avx512( n, x.data() );
 
   // Display result
   std::cout << "\nvariance (serial) = " << m1 // m1 = 0.1000

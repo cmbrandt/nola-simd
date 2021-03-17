@@ -19,9 +19,9 @@ int main()
   std::int32_t n = x.size();
 
   // Compute arithmetic mean
-  double m1 = nola::correlation_serial( n, x.data(), y.data() );
-  //double m2 = nola::correlation_avx2(   n, x.data(), y.data() );
-  //double m3 = nola::correlation_avx512( n, x.data(), y.data() );
+  float m1 = nola::correlation_serial( n, x.data(), y.data() );
+  //float m2 = nola::correlation_avx2(   n, x.data(), y.data() );
+  //float m3 = nola::correlation_avx512( n, x.data(), y.data() );
 
   // Display result
   std::cout << "\ncorrelation (serial) = " << m1 // m1 = -0.9000

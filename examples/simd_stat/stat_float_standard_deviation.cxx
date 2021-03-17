@@ -18,9 +18,9 @@ int main()
   std::int32_t n = x.size();
 
   // Compute arithmetic mean
-  double m1 = nola::standard_deviation_serial( n, x.data() );
-  //double m2 = nola::standard_deviation_avx2(   n, x.data() );
-  //double m3 = nola::standard_deviation_avx512( n, x.data() );
+  float m1 = nola::standard_deviation_serial( n, x.data() );
+  //float m2 = nola::standard_deviation_avx2(   n, x.data() );
+  //float m3 = nola::standard_deviation_avx512( n, x.data() );
 
   // Display result
   std::cout << "\nstandard deviation (serial) = " << m1 // m1 = 0.3162

@@ -43,11 +43,6 @@ correlation_avx2(std::int32_t n, R const x[ ], R const y[ ]);
 
 // Arithmetic Mean
 
-template <Real R>
-inline R
-arithmetic_mean_avx2(std::int32_t n, const R x[ ])
-{
-  std::int32_t width = nola::avx2_width<R>::value;
 
    
 

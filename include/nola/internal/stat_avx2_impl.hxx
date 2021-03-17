@@ -49,7 +49,7 @@ arithmetic_mean_avx2(std::int32_t n, const R x[ ])
 {
   std::int32_t width = nola::avx2_width<R>::value;
 
-  
+   
 
 
 

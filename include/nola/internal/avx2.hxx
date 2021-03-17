@@ -27,8 +27,8 @@ using v256d = __m256d;
 // Declarations
 
 
-template <Real R>
-inline std::int32_t avx2_width();
+template <Integer I, Real R> // Helper class declaration
+struct avx2_width;
 
 template <Real R>
 inline auto avx2_set_zero();
@@ -68,26 +68,30 @@ inline double avx2_reduce(v256d a);
 // Helper classes
 
 
-namespace detail
-{
+// Specializations for avx2_width
 
-// Helper class for avx2_length
+template <Integer I>
+struct avx2_width<I, float> {
 
-template <Real R>
-struct simd_mm256_width;
+  using value_type = I;
+  static constexpr value_type value{8};
 
-template <>
-struct simd_mm256_width<float> {
-  static constexpr std::int32_t value{8};
+  constexpr operator value_type() const noexcept { return value; }
 };
 
-template <>
-struct simd_mm256_width<double> {
-  static constexpr std::int32_t value{4};
+template <Integer I>
+struct avx2_width<I, double> {
+
+  using value_type = I;
+  static constexpr value_type value{4};
+
+  constexpr operator value_type() const noexcept { return value; }
 };
 
 
 // Helper class for avx2_set_zero
+
+namespace detail {
 
 template <Real R>
 struct simd_mm256_setzero {
@@ -114,9 +118,8 @@ struct simd_mm256_setzero<double> {
 // Definitions
 
 
-template <Real R>
-inline std::int32_t
-avx2_width() { return detail::simd_mm256_width<R>::value; }
+// constexpr auto
+// avx2_width<I, R>();
 
 
 template <Real R>

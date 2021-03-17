@@ -27,8 +27,8 @@ using v512d = __m512d;
 // Declarations
 
 
-template <Real R>
-inline std::int32_t avx512_width();
+template <Integer I, Real R> // Helper class declaration
+struct avx512_width;
 
 template <Real R>
 inline auto avx512_set_zero();
@@ -68,26 +68,30 @@ inline double avx512_reduce(v512d a);
 // Helper classes
 
 
-namespace detail
-{
+// Specializations for avx512_width
 
-// Helper class for avx512_length
+template <Integer I>
+struct avx512_width<I, float> {
 
-template <Real R>
-struct simd_mm512_width;
+  using value_type = I;
+  static constexpr value_type value{16};
 
-template <>
-struct simd_mm512_width<float> {
-  static constexpr std::int32_t value{16};
+  constexpr operator value_type() const noexcept { return value; }
 };
 
-template <>
-struct simd_mm512_width<double> {
-  static constexpr std::int32_t value{8};
+template <Integer I>
+struct avx512_width<I, double> {
+
+  using value_type = I;
+  static constexpr value_type value{8};
+
+  constexpr operator value_type() const noexcept { return value; }
 };
 
 
 // Helper class for avx512_set_zero
+
+namespace detail {
 
 template <class Real> // <Real R>
 struct simd_mm512_setzero {
@@ -114,9 +118,8 @@ struct simd_mm512_setzero<double> {
 // Definitions
 
 
-template <Real R>
-inline std::int32_t
-avx512_width() { return detail::simd_mm512_width<R>::value; }
+// constexpr auto
+// avx2_width<I, R>();
 
 
 template <Real R>

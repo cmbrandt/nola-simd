@@ -12,7 +12,7 @@ int main()
   std::cout << "\nArithmetic Mean (Float) Example." << std::endl;
 
   // Sequence of values
-  std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
+  std::vector<float> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
   // Length of sequence
   std::int32_t n = x.size();

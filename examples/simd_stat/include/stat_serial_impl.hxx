@@ -115,7 +115,7 @@ standard_deviation_serial(I n, R const x[ ])
 
 template <Integer I, Real R>
 inline R
-covariance_serial_impl(I n, R const x[ ], R const y[ ])
+covariance_serial(I n, R const x[ ], R const y[ ])
 {
   // Compute the mean of the first sequence
   R sum{0.0};
@@ -150,7 +150,7 @@ covariance_serial_impl(I n, R const x[ ], R const y[ ])
 
 template <Integer I, Real R>
 inline R
-correlation_serial_impl(I n, R const x[ ], R const y[ ])
+correlation_serial(I n, R const x[ ], R const y[ ])
 {
   // Compute the mean of the first sequence
   R sum{0.0};

@@ -37,7 +37,7 @@ int test_avx2_float()
 
 int test_avx2_float_width()
 {
-  std::int32_t r = nola::simd::avx2_width<float>();
+  constexpr std::int32_t r = nola::simd::avx2_width<std::int32_t, float>();
   std::int32_t soln{8};
 
   if (r != soln) {

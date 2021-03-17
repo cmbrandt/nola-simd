@@ -37,7 +37,7 @@ int test_avx512_double()
 
 int test_avx512_double_width()
 {
-  std::int32_t r = nola::simd::avx512_width<double>();
+  constexpr std::int32_t r = nola::simd::avx512_width<std::int32_t, double>();
   std::int32_t soln{8};
 
   if (r != soln) {

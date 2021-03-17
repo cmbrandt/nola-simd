@@ -37,7 +37,7 @@ int test_avx2_double()
 
 int test_avx2_double_width()
 {
-  std::int32_t r = nola::simd::avx2_width<double>();
+  constexpr std::int32_t r = nola::simd::avx2_width<std::int32_t, double>();
   std::int32_t soln{4};
 
   if (r != soln) {

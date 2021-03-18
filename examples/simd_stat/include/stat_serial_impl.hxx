@@ -49,7 +49,7 @@ arithmetic_mean_serial(I n, R const x[ ])
 {
   R sum{0.0};
   
-  for (std::int32_t i{0}; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += x[i];
 
   return sum / n;
@@ -65,7 +65,7 @@ variance_serial(I n, R const x[ ])
   // Compute the mean of the sequence
   R sum{0.0};
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += x[i];
 
   R mean = sum / n;
@@ -91,7 +91,7 @@ standard_deviation_serial(I n, R const x[ ])
   // Compute the mean of the sequence
   R sum{0.0};
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += x[i];
 
   R mean = sum / n;
@@ -120,7 +120,7 @@ covariance_serial(I n, R const x[ ], R const y[ ])
   // Compute the mean of the first sequence
   R sum{0.0};
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += x[i];
 
   R x_mean = sum / n;
@@ -155,7 +155,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   // Compute the mean of the first sequence
   R sum{0.0};
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += x[i];
 
   R x_mean = sum / n;

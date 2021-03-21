@@ -244,6 +244,66 @@ covariance_avx512(I n, R const x[ ], R const y[ ])
 }
 
 
+// Correlation
+
+template <Integer I, Real R>
+inline R
+correlation_avx512(I n, R const x[ ], R const y[ ])
+{
+  // Compute the mean of the first sequence
+  R sum{0.0};
+
+  for (I i{0}; i < n; ++i)
+    sum += x[i];
+
+  R x_mean = sum / n;
+
+  // Compute the variance of the first sequence
+  sum = 0.0;
+
+  for (I i = 0; i < n; ++i) {
+    R x_center = x[i] - x_mean;
+    sum += x_center * x_center;
+  }
+
+  R x_var = sum / (n - 1);
+
+  // Compute the mean of the second sequence
+  sum = 0.0;
+
+  for (I i = 0; i < n; ++i)
+    sum += y[i];
+
+  R y_mean = sum / n;
+
+  // Compute the variance of the second sequence
+  sum = 0.0;
+
+  for (I i = 0; i < n; ++i) {
+    R y_center = y[i] - y_mean;
+    sum += y_center * y_center;
+  }
+
+  R y_var = sum / (n - 1);
+
+  // Compute the standard deviation of the two sequences
+  R x_std = std::sqrt(x_var);
+  R y_std = std::sqrt(y_var);
+
+  // Compute and return the correlation of the two sequences
+  sum = 0.0;
+
+  for (I i = 0; i < n; ++i) {
+    R x_center = x[i] - x_mean;
+    R y_center = y[i] - y_mean;
+    sum += x_center * y_center;
+  }
+
+  R cov = sum / (n - 1);
+  return cov / (x_std * y_std);
+}
+
+
 }
 
 

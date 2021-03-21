@@ -63,18 +63,6 @@ inline v512d avx512_fma(v512d a, v512d b, v512d c);
 inline float  avx512_reduce(v512f a);
 inline double avx512_reduce(v512d a);
 
-inline float operator+(v512f a, v512f b);
-inline float operator+(v512d a, v512d b);
-
-inline float operator-(v512f a, v512f b);
-inline float operator-(v512d a, v512d b);
-
-inline float operator*(v512f a, v512f b);
-inline float operator*(v512d a, v512d b);
-
-inline float operator/(v512f a, v512f b);
-inline float operator/(v512d a, v512d b);
-
 
 //----------------------------------------------------------------------------//
 // Helper classes
@@ -206,30 +194,6 @@ inline float
 avx512_reduce(v512f a) { return _mm512_reduce_add_ps(a); }
 inline double
 avx512_reduce(v512d a) { return _mm512_reduce_add_pd(a); }
-
-
-inline v512f
-operator+(v512f a, v512f b) { return _mm512_add_ps(a, b); }
-inline v512d
-operator+(v512d a, v512d b) { return _mm512_add_pd(a, b); }
-
-
-inline v512f 
-operator-(v512f a, v512f b) { return _mm512_sub_ps(a, b); }
-inline v512d 
-operator-(v512d a, v512d b) { return _mm512_sub_pd(a, b); }
-
-
-inline v512f
-operator*(v512f a, v512f b) { return _mm512_mul_ps(a, b); }
-inline v512d
-operator*(v512d a, v512d b) { return _mm512_mul_pd(a, b); }
-
-
-inline v512f
-operator/(v512f a, v512f b) { return _mm512_div_ps(a, b); }
-inline v512d
-operator/(v512d a, v512d b) { return _mm512_div_pd(a, b); }
 
 
 } // namespace simd

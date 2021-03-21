@@ -63,6 +63,18 @@ inline v256d avx2_fma(v256d a, v256d b, v256d c);
 inline float  avx2_reduce(v256f a);
 inline double avx2_reduce(v256d a);
 
+inline float operator+(v256f a, v256f b);
+inline float operator+(v256d a, v256d b);
+
+inline float operator-(v256f a, v256f b);
+inline float operator-(v256d a, v256d b);
+
+inline float operator*(v256f a, v256f b);
+inline float operator*(v256d a, v256d b);
+
+inline float operator/(v256f a, v256f b);
+inline float operator/(v256d a, v256d b);
+
 
 //----------------------------------------------------------------------------//
 // Helper classes
@@ -205,6 +217,30 @@ avx2_reduce(v256d a)
   __m128d high64  = _mm_unpackhi_pd(low128, low128);
   return _mm_cvtsd_f64(_mm_add_sd(low128, high64));
 }
+
+
+inline v256f
+operator+(v256f a, v256f b) { return _mm256_add_ps(a, b); }
+inline v256d
+operator+(v256d a, v256d b) { return _mm256_add_pd(a, b); }
+
+
+inline v256f 
+operator-(v256f a, v256f b) { return _mm256_sub_ps(a, b); }
+inline v256d 
+operator-(v256d a, v256d b) { return _mm256_sub_pd(a, b); }
+
+
+inline v256f
+operator*(v256f a, v256f b) { return _mm256_mul_ps(a, b); }
+inline v256d
+operator*(v256d a, v256d b) { return _mm256_mul_pd(a, b); }
+
+
+inline v256f
+operator/(v256f a, v256f b) { return _mm256_div_ps(a, b); }
+inline v256d
+operator/(v256d a, v256d b) { return _mm256_div_pd(a, b); }
 
 
 } // namespace simd

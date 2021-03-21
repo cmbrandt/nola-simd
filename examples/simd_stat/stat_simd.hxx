@@ -4,9 +4,10 @@
 #ifndef NOLA_STAT_SIMD_HXX
 #define NOLA_STAT_SIMD_HXX
 
-#include "stat_avx2_impl.hxx"
-#include "stat_avx512_impl.hxx"
-#include "stat_serial_impl.hxx"
+#include "stat_impl_avx2.hxx"
+#include "stat_impl_avx512.hxx"
+#include "stat_impl_serial.hxx"
+#include "stat_prng.hxx"
 
 
 #endif

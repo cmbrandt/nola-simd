@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <iostream>
 #include <vector>
-#include "include/stat_simd.hxx"
+#include "stat_simd.hxx"
 
 
 int main()

@@ -73,7 +73,7 @@ variance_serial(I n, R const x[ ])
   // Compute and return the variance of the sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R center = x[i] - mean;
     sum += center * center;
   }
@@ -99,7 +99,7 @@ standard_deviation_serial(I n, R const x[ ])
   // Compute the variance of the sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R center = x[i] - mean;
     sum += center * center;
   }
@@ -128,7 +128,7 @@ covariance_serial(I n, R const x[ ], R const y[ ])
   // Compute the mean of the second sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += y[i];
 
   R y_mean = sum / n;
@@ -136,7 +136,7 @@ covariance_serial(I n, R const x[ ], R const y[ ])
   // Compute and return the covariance of the two sequences
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R x_center = x[i] - x_mean;
     R y_center = y[i] - y_mean;
     sum += x_center * y_center;
@@ -163,7 +163,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   // Compute the variance of the first sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R x_center = x[i] - x_mean;
     sum += x_center * x_center;
   }
@@ -173,7 +173,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   // Compute the mean of the second sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i)
+  for (I i{0}; i < n; ++i)
     sum += y[i];
 
   R y_mean = sum / n;
@@ -181,7 +181,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   // Compute the variance of the second sequence
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R y_center = y[i] - y_mean;
     sum += y_center * y_center;
   }
@@ -195,7 +195,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   // Compute and return the correlation of the two sequences
   sum = 0.0;
 
-  for (I i = 0; i < n; ++i) {
+  for (I i{0}; i < n; ++i) {
     R x_center = x[i] - x_mean;
     R y_center = y[i] - y_mean;
     sum += x_center * y_center;

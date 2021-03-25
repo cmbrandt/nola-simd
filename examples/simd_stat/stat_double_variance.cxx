@@ -1,6 +1,7 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
+#include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <vector>
@@ -11,21 +12,25 @@ int main()
 {
   std::cout << "\nVariance (Double) Example." << std::endl;
 
-  // Sequence of values
-  std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0,
-                         0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0 };
-
   // Length of sequence
-  std::int32_t n = x.size();
+  int n{100};
 
-  // Compute arithmetic mean
+  // Pseudo-random number generator
+  Random_values<int, double> rand(0);
+
+  // Sequence of pseudo-random values
+  std::vector<double> x(n);
+
+  std::generate_n( x.begin(), n, rand );
+
+  // Compute variance
   double m1 = nola::variance_serial( n, x.data() );
   double m2 = nola::variance_avx2(   n, x.data() );
   double m3 = nola::variance_avx512( n, x.data() );
 
   // Display result
-  std::cout << "\nvariance (serial) = " << m1 // m1 = 0.3473
-            << "\nvariance (avx2)   = " << m2 // m2 = 0.3473
-            << "\nvariance (avx512) = " << m3 // m3 = 0.3473
+  std::cout << "\nvariance (serial) = " << m1
+            << "\nvariance (avx2)   = " << m2
+            << "\nvariance (avx512) = " << m3
             << std::endl;
 }

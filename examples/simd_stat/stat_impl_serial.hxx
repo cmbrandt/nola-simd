@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #ifndef NOLA_STAT_IMPL_SERIAL_HXX
@@ -18,23 +18,23 @@ namespace nola
 
 template <Integer I, Real R>
 inline R
-arithmetic_mean_serial(I n, R const x[ ]);
+arithmetic_mean_serial(I n, R const x[]);
 
 template <Integer I, Real R>
 inline R
-variance_serial(I n, R const x[ ]);
+variance_serial(I n, R const x[]);
 
 template <Integer I, Real R>
 inline R
-standard_deviation_serial(I n, R const x[ ]);
+standard_deviation_serial(I n, R const x[]);
 
 template <Integer I, Real R>
 inline R
-covariance_serial(I n, R const x[ ], R const y[ ]);
+covariance_serial(I n, R const x[], R const y[]);
 
 template <Integer I, Real R>
 inline R
-correlation_serial(I n, R const x[ ], R const y[ ]);
+correlation_serial(I n, R const x[], R const y[]);
 
 
 //----------------------------------------------------------------------------//
@@ -45,7 +45,7 @@ correlation_serial(I n, R const x[ ], R const y[ ]);
 
 template <Integer I, Real R>
 inline R
-arithmetic_mean_serial(I n, R const x[ ])
+arithmetic_mean_serial(I n, R const x[])
 {
   R sum{0.0};
   
@@ -60,7 +60,7 @@ arithmetic_mean_serial(I n, R const x[ ])
 
 template <Integer I, Real R>
 inline R
-variance_serial(I n, R const x[ ])
+variance_serial(I n, R const x[])
 {
   // Compute the mean of the sequence
   R sum{0.0};
@@ -70,7 +70,7 @@ variance_serial(I n, R const x[ ])
 
   R mean = sum / n;
 
-  // Compute and return the variance of the sequence
+  // Compute the variance of the sequence
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {
@@ -86,7 +86,7 @@ variance_serial(I n, R const x[ ])
 
 template <Integer I, Real R>
 inline R
-standard_deviation_serial(I n, R const x[ ])
+standard_deviation_serial(I n, R const x[])
 {
   // Compute the mean of the sequence
   R sum{0.0};
@@ -115,7 +115,7 @@ standard_deviation_serial(I n, R const x[ ])
 
 template <Integer I, Real R>
 inline R
-covariance_serial(I n, R const x[ ], R const y[ ])
+covariance_serial(I n, R const x[], R const y[])
 {
   // Compute the mean of the first sequence
   R sum{0.0};
@@ -133,7 +133,7 @@ covariance_serial(I n, R const x[ ], R const y[ ])
 
   R y_mean = sum / n;
 
-  // Compute and return the covariance of the two sequences
+  // Compute the covariance of the two sequences
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {
@@ -150,7 +150,7 @@ covariance_serial(I n, R const x[ ], R const y[ ])
 
 template <Integer I, Real R>
 inline R
-correlation_serial(I n, R const x[ ], R const y[ ])
+correlation_serial(I n, R const x[], R const y[])
 {
   // Compute the mean of the first sequence
   R sum{0.0};
@@ -192,7 +192,7 @@ correlation_serial(I n, R const x[ ], R const y[ ])
   R x_std = std::sqrt(x_var);
   R y_std = std::sqrt(y_var);
 
-  // Compute and return the correlation of the two sequences
+  // Compute the correlation of the two sequences
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {

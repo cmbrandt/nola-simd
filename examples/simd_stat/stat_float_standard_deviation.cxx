@@ -1,6 +1,7 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
+#include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <vector>
@@ -11,12 +12,16 @@ int main()
 {
   std::cout << "\nStandard Deviation (Float) Example." << std::endl;
 
-  // Sequence of values
-  std::vector<float> x{ 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0,
-                        0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0 };
-
   // Length of sequence
-  std::int32_t n = x.size();
+  int n{100};
+
+  // Pseudo-random number generator
+  Random_values<int, float> rand(0);
+
+  // Sequence of pseudo-random values
+  std::vector<float> x(n);
+
+  std::generate_n( x.begin(), n, rand );
 
   // Compute arithmetic mean
   float m1 = nola::standard_deviation_serial( n, x.data() );
@@ -24,8 +29,8 @@ int main()
   float m3 = nola::standard_deviation_avx512( n, x.data() );
 
   // Display result
-  std::cout << "\nstandard deviation (serial) = " << m1 // m1 = 0.58938
-            << "\nstandard deviation (avx2)   = " << m2 // m2 = 0.58938
-            << "\nstandard deviation (avx512) = " << m3 // m3 = 0.58938
+  std::cout << "\nstandard deviation (serial) = " << m1
+            << "\nstandard deviation (avx2)   = " << m2
+            << "\nstandard deviation (avx512) = " << m3
             << std::endl;
 }

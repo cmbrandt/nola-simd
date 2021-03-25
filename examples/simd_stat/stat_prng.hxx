@@ -16,13 +16,13 @@ class Random_values {
 
 public:
   Random_values() = default;
-  Random_values(I seed) : gen(seed) { }
+  Random_values(I seed) : g(seed) { }
 
-  R operator()() { return dist(gen); }
+  R operator()() { return dist(g); }
 
 private:
-  Generator    gen{std::random_device{}()};
-  Distribution dist{0.0, 1.0};
+  Generator    g{std::random_device{}()};
+  Distribution dist{0.5, 2.0};
 };
 
 

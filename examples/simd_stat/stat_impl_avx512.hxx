@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #ifndef NOLA_STAT_IMPL_AVX512_HXX
@@ -163,7 +163,7 @@ standard_deviation_avx512(I n, R const x[ ])
     auto meanv = nola::simd::avx512_set_scalar(mean);
     auto tempv = nola::simd::avx512_set_zero<R>();
 
-    for (int i{m}; i < n; i += w) {
+    for (I i{m}; i < n; i += w) {
       auto xv    = nola::simd::avx512_load(&x[i]);
       auto centv = nola::simd::avx512_sub(xv, meanv);
       tempv      = nola::simd::avx512_fma(centv, centv, tempv);
@@ -229,7 +229,7 @@ covariance_avx512(I n, R const x[ ], R const y[ ])
     auto mean_yv = nola::simd::avx512_set_scalar(y_mean);
     auto sumv    = nola::simd::avx512_set_zero<R>();
 
-    for (int i{m}; i < n; i += w) {
+    for (I i{m}; i < n; i += w) {
       auto xv        = nola::simd::avx512_load(&x[i]);
       auto center_xv = nola::simd::avx512_sub(xv, mean_xv);
       auto yv        = nola::simd::avx512_load(&y[i]);

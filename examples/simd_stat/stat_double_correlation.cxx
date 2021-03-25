@@ -16,7 +16,7 @@ int main()
   int n{100};
 
   // Pseudo-random number generator
-  Random_values<int, double> rand();
+  Random_values<int, double> rand(0);
   
   // Sequences of pseudo-random values 
   std::vector<double> x(n);

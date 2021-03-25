@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #ifndef NOLA_UTIL_HXX
@@ -25,20 +25,20 @@ namespace util
 
 template <Real R>
 inline void
-print_vector(std::string_view s, std::int32_t size, R const a [ ]);
+print_vector(std::string_view s, std::int32_t size, R const a []);
 
 template <Real R>
 inline void
-print_vector(std::string_view s, std::int32_t size, R const a[ ], std::int32_t precision, std::int32_t width);
+print_vector(std::string_view s, std::int32_t size, R const a[], std::int32_t precision, std::int32_t width);
 
 
 template <Real R>
 inline void
-print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[ ]);
+print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[]);
 
 template <Real R>
 inline void
-print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[ ], std::int32_t precision, std::int32_t width);
+print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[], std::int32_t precision, std::int32_t width);
 
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a
 
 // Display all elements of a one-dimensional container
 template <Real R>
-void print_vector(std::string_view s, std::int32_t size, R const a[ ], std::int32_t precision, std::int32_t width)
+void print_vector(std::string_view s, std::int32_t size, R const a[], std::int32_t precision, std::int32_t width)
 {
   std::cout << s << " = [" << std::endl;
 
@@ -62,7 +62,7 @@ void print_vector(std::string_view s, std::int32_t size, R const a[ ], std::int3
 }
 
 template <Real R>
-void print_vector(std::string_view s, std::int32_t size, R const a[ ])
+void print_vector(std::string_view s, std::int32_t size, R const a[])
 {
   return print_vector(s, size, a, 6, 8);
 }
@@ -73,7 +73,7 @@ void print_vector(std::string_view s, std::int32_t size, R const a[ ])
 
 // Display all elements of a two-dimensional container
 template <Real R>
-void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[ ], std::int32_t precision , std::int32_t width )
+void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[], std::int32_t precision , std::int32_t width )
 {
   std::cout << s << " = [" << std::endl;
 
@@ -90,7 +90,7 @@ void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R co
 }
 
 template <Real R>
-void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[ ] )
+void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a[] )
 {
   return print_matrix(s, rows, cols, a, 6, 8);
 }

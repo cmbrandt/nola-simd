@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #ifndef NOLA_SIMD_TEST_AVX2_DOUBLE_HXX

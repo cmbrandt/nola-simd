@@ -56,9 +56,9 @@ int test_avx512_float_set_zero_and_store()
   std::vector<float> a(16);
   std::vector<float> soln(16, 0.0);
 
-  auto av = nola::simd::avx512_set_zero<float>();
+  auto va = nola::simd::avx512_set_zero<float>();
 
-  nola::simd::avx512_store( a.data(), av );
+  nola::simd::avx512_store( a.data(), va );
 
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
@@ -78,9 +78,9 @@ int test_avx512_float_set_scalar()
   std::vector<float> a(16);
   std::vector<float> soln(16, 5.5);
 
-  auto av = nola::simd::avx512_set_scalar(5.5f);
+  auto va = nola::simd::avx512_set_scalar(5.5f);
 
-  nola::simd::avx512_store( a.data(), av );
+  nola::simd::avx512_store( a.data(), va );
 
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
@@ -101,9 +101,9 @@ int test_avx512_float_broadcast()
   std::vector<float> soln(16, 5.5);
   float s{5.5};
 
-  auto av = nola::simd::avx512_broadcast(&s);
+  auto va = nola::simd::avx512_broadcast(&s);
 
-  nola::simd::avx512_store( a.data(), av );
+  nola::simd::avx512_store( a.data(), va );
 
   bool r = compare_sequences( a.begin(), a.end(), soln.begin() );
 
@@ -124,9 +124,9 @@ int test_avx512_float_load()
   std::vector<float> b(16);
   std::vector<float> soln(16, 5.5);
 
-  auto av = nola::simd::avx512_load( a.data() );
+  auto va = nola::simd::avx512_load( a.data() );
 
-  nola::simd::avx512_store( b.data(), av );
+  nola::simd::avx512_store( b.data(), va );
 
   bool r = compare_sequences( b.begin(), b.end(), soln.begin() );
 
@@ -148,12 +148,12 @@ int test_avx512_float_add()
   std::vector<float> c(16);
   std::vector<float> soln(16, 7.7);
 
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
 
-  auto cv = nola::simd::avx512_add(av, bv);
+  auto vc = nola::simd::avx512_add(va, vb);
 
-  nola::simd::avx512_store( c.data(), cv );
+  nola::simd::avx512_store( c.data(), vc );
 
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
@@ -175,12 +175,12 @@ int test_avx512_float_sub()
   std::vector<float> c(16);
   std::vector<float> soln(16, 3.3);
 
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
 
-  auto cv = nola::simd::avx512_sub(av, bv);
+  auto vc = nola::simd::avx512_sub(va, vb);
 
-  nola::simd::avx512_store( c.data(), cv );
+  nola::simd::avx512_store( c.data(), vc );
 
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
@@ -202,12 +202,12 @@ int test_avx512_float_mul()
   std::vector<float> c(16);
   std::vector<float> soln(16, 12.1);
 
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
 
-  auto cv = nola::simd::avx512_mul(av, bv);
+  auto vc = nola::simd::avx512_mul(va, vb);
 
-  nola::simd::avx512_store( c.data(), cv );
+  nola::simd::avx512_store( c.data(), vc );
 
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
@@ -229,12 +229,12 @@ int test_avx512_float_div()
   std::vector<float> c(16);
   std::vector<float> soln(16, 2.5);
 
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
 
-  auto cv = nola::simd::avx512_div(av, bv);
+  auto vc = nola::simd::avx512_div(va, vb);
 
-  nola::simd::avx512_store( c.data(), cv );
+  nola::simd::avx512_store( c.data(), vc );
 
   bool r = compare_sequences( c.begin(), c.end(), soln.begin() );
 
@@ -257,13 +257,13 @@ int test_avx512_float_fma()
   std::vector<float> d(16);
   std::vector<float> soln(16, 13.2);
 
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
-  auto cv = nola::simd::avx512_load( c.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
+  auto vc = nola::simd::avx512_load( c.data() );
 
-  auto dv = nola::simd::avx512_fma(av, bv, cv);
+  auto vd = nola::simd::avx512_fma(va, vb, vc);
 
-  nola::simd::avx512_store( d.data(), dv );
+  nola::simd::avx512_store( d.data(), vd );
 
   bool r = compare_sequences( d.begin(), d.end(), soln.begin() );
 
@@ -284,9 +284,9 @@ int test_avx512_float_reduce()
                         6.2, 2.5, 4.3, 0.7, 4.8, 3.0, 1.8, 2.1 };
   float soln{54.3};
 
-  auto av = nola::simd::avx512_load( a.data() );
+  auto va = nola::simd::avx512_load( a.data() );
 
-  float r = nola::simd::avx512_reduce(av);
+  float r = nola::simd::avx512_reduce(va);
 
   if (r != soln) {
     std::cout << "\nERROR! test_avx512_float_reduce()"

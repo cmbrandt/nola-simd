@@ -6,7 +6,7 @@
 #include <nola/simd.hxx>
 #include <test_helpers.hxx>
 #include <test_avx2_float.hxx>
-
+#include <iomanip>
 
 int test_avx2_float()
 {
@@ -285,11 +285,13 @@ int test_avx2_float_reduce()
 
   auto va = nola::simd::avx2_load( a.data() );
 
-  float r = nola::simd::avx2_reduce(va);
+  float s = nola::simd::avx2_reduce(va);
 
-  if (r != soln) {
+  bool r = std::abs(s - 28.9f) > 0.00001;
+
+  if (r == true) {
     std::cout << "\nERROR! test_avx2_float_reduce()"
-              << "\nr    = " << r
+              << "\ns    = " << s
               << "\nsoln = " << soln << std::endl;
     return 1;
   }

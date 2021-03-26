@@ -181,18 +181,22 @@ inline v256d
 avx2_fma(v256d a, v256d b, v256d c) { return _mm256_fmadd_pd(a, b, c); }
 
 
-// TODO: Proper implemention for this routine.
 inline float
 avx2_reduce(v256f a)
 {
-  float arr[8];
-  _mm256_storeu_ps(&arr[0], a);
+  __m128 low128  = _mm256_castps256_ps128(a);
+  __m128 high128 = _mm256_extractf128_ps(a, 1);
+  __m128 sum128  = _mm_add_ps(low128, high128);
 
-  float sum{0};
-  for (int i = 0; i < 8; ++i)
-    sum += arr[i];
+  __m128 low64  = sum128;
+  __m128 high64 = _mm_movehl_ps(sum128, sum128);
+  __m128 sum64  = _mm_add_ps(low64, high64);
 
-  return sum;
+  __m128 low  = sum64;
+  __m128 high = _mm_shuffle_ps(sum64, sum64, 0x1);
+  __m128 sum  = _mm_add_ss(low, high);
+
+  return _mm_cvtss_f32(sum);
 }
 
 inline double

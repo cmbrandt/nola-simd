@@ -14,10 +14,10 @@ int main()
   std::vector<double> a{ 1.1, 4.9, 2.3, 3.5, 5.7, 2.8, 0.6, 8.0 };
 
   // Define SIMD object using input data
-  auto av = nola::simd::avx512_load( a.data() );
+  auto va = nola::simd::avx512_load( a.data() );
 
   // Compute sum of all elements in SIMD object
-  double r = nola::simd::avx512_reduce(av);
+  double r = nola::simd::avx512_reduce(va);
 
   // Display result
   std::cout << "\nr = " << r << std::endl; // r = 28.9

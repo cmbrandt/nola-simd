@@ -19,10 +19,10 @@ int main()
   std::vector<float> b(16);
 
   // Define SIMD object using input data
-  auto av = nola::simd::avx512_load( a.data() );
+  auto va = nola::simd::avx512_load( a.data() );
 
   // Transfer data from SIMD object to container
-  nola::simd::avx512_store( b.data(), av );
+  nola::simd::avx512_store( b.data(), va );
 
   // Display result
   nola::util::print_vector("\nb", b.size(), b.data(), 2, 3);

@@ -15,10 +15,10 @@ int main()
                         6.2, 2.5, 4.3, 0.7, 4.8, 3.0, 1.8, 2.1 };
 
   // Define SIMD object using input data
-  auto av = nola::simd::avx512_load( a.data() );
+  auto va = nola::simd::avx512_load( a.data() );
 
   // Compute sum of all elements in SIMD object
-  float r = nola::simd::avx512_reduce(av);
+  float r = nola::simd::avx512_reduce(va);
 
   // Display result
   std::cout << "\nr = " << r << std::endl; // r = 54.3

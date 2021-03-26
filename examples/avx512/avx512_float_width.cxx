@@ -13,5 +13,5 @@ int main()
   constexpr std::int32_t w = nola::simd::avx512_width<std::int32_t, float>();
 
   // Display result
-  std::cout << "\nwidth = " << w << std::endl; // w = 16
+  std::cout << "\nw = " << w << std::endl; // w = 16
 }

@@ -20,15 +20,15 @@ int main()
   std::vector<double> d(8);
 
   // Define SIMD objects using input data
-  auto av = nola::simd::avx512_load( a.data() );
-  auto bv = nola::simd::avx512_load( b.data() );
-  auto cv = nola::simd::avx512_load( c.data() );
+  auto va = nola::simd::avx512_load( a.data() );
+  auto vb = nola::simd::avx512_load( b.data() );
+  auto vc = nola::simd::avx512_load( c.data() );
 
   // Compute SIMD operation d = (a * b) + c
-  auto dv = nola::simd::avx512_fma(av, bv, cv);
+  auto vd = nola::simd::avx512_fma(va, vb, vc);
 
   // Transfer data from SIMD object to container
-  nola::simd::avx512_store( d.data(), dv );
+  nola::simd::avx512_store( d.data(), vd );
 
   // Display result
   nola::util::print_vector("\nd", d.size(), d.data(), 3, 4);

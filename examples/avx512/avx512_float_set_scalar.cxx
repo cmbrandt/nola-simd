@@ -15,10 +15,10 @@ int main()
   std::vector<float> a(16);
 
   // Define SIMD object using scalar value
-  auto av = nola::simd::avx512_set_scalar(5.5f);
+  auto va = nola::simd::avx512_set_scalar(5.5f);
 
   // Transfer data from SIMD object to container
-  nola::simd::avx512_store( a.data(), av );
+  nola::simd::avx512_store( a.data(), va );
 
   // Display result
   nola::util::print_vector("\na", a.size(), a.data(), 2, 3);

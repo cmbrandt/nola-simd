@@ -18,10 +18,10 @@ int main()
   double s = 5.5;
 
   // Broadcast scalar value to each element of SIMD object
-  auto av = nola::simd::avx512_broadcast(&s);
+  auto va = nola::simd::avx512_broadcast(&s);
 
   // Transfer data from SIMD object to container
-  nola::simd::avx512_store( a.data(), av );
+  nola::simd::avx512_store( a.data(), va );
 
   // Display result
   nola::util::print_vector("\na", a.size(), a.data(), 2, 3);

@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nCovariance (Float) Example." << std::endl;
+  std::cout << "\nCovariance Float Example." << std::endl;
 
   // Length of sequences
   int n{100};

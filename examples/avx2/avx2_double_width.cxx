@@ -9,7 +9,7 @@ int main()
 {
   std::cout << "\nSIMD AVX2 Double Width Example." << std::endl;
 
-  // Compute length of SIMD object
+  // Compute width of SIMD object
   constexpr std::int32_t w = nola::simd::avx2_width<std::int32_t, double>();
 
   // Display result

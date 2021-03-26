@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -9,7 +9,7 @@ int main()
 {
   std::cout << "\nSIMD AVX512 Double Width Example." << std::endl;
 
-  // Compute length of SIMD object
+  // Compute width of SIMD object
   constexpr std::int32_t w = nola::simd::avx512_width<std::int32_t, double>();
 
   // Display result

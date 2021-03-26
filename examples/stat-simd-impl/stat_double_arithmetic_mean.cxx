@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nArithmetic Mean (Double) Example." << std::endl;
+  std::cout << "\nArithmetic Mean Double Example." << std::endl;
 
   // Length of sequence
   int n{100};

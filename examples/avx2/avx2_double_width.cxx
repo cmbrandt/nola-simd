@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -13,5 +13,5 @@ int main()
   constexpr std::int32_t w = nola::simd::avx2_width<std::int32_t, double>();
 
   // Display result
-  std::cout << "\nwidth = " << w << std::endl; // w = 4
+  std::cout << "\nw = " << w << std::endl; // w = 4
 }

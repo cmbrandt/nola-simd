@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -18,10 +18,10 @@ int main()
   std::vector<double> b(4);
 
   // Define SIMD object using input data
-  auto av = nola::simd::avx2_load( a.data() );
+  auto va = nola::simd::avx2_load( a.data() );
 
   // Transfer data from SIMD object to container
-  nola::simd::avx2_store( b.data(), av );
+  nola::simd::avx2_store( b.data(), va );
 
   // Display result
   nola::util::print_vector("\nb", b.size(), b.data(), 2, 3);

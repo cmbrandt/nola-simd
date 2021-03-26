@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -20,15 +20,15 @@ int main()
   std::vector<double> d(4);
 
   // Define SIMD objects using input data
-  auto av = nola::simd::avx2_load( a.data() );
-  auto bv = nola::simd::avx2_load( b.data() );
-  auto cv = nola::simd::avx2_load( c.data() );
+  auto va = nola::simd::avx2_load( a.data() );
+  auto vb = nola::simd::avx2_load( b.data() );
+  auto vc = nola::simd::avx2_load( c.data() );
 
   // Compute SIMD operation d = (a * b) + c
-  auto dv = nola::simd::avx2_fma(av, bv, cv);
+  auto vd = nola::simd::avx2_fma(va, vb, vc);
 
   // Transfer data from SIMD object to container
-  nola::simd::avx2_store( d.data(), dv );
+  nola::simd::avx2_store( d.data(), vd );
 
   // Display result
   nola::util::print_vector("\nd", d.size(), d.data(), 3, 4);

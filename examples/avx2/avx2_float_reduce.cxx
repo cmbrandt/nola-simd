@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -14,10 +14,10 @@ int main()
   std::vector<float> a{ 1.1, 4.9, 2.3, 3.5, 5.7, 2.8, 0.6, 8.0 };
 
   // Define SIMD object using input data
-  auto av = nola::simd::avx2_load( a.data() );
+  auto va = nola::simd::avx2_load( a.data() );
 
   // Compute sum of all elements in SIMD object
-  float r = nola::simd::avx2_reduce(av);
+  float r = nola::simd::avx2_reduce(va);
 
   // Display result
   std::cout << "\nr = " << r << std::endl; // r = 28.9

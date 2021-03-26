@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2021 Christopher M. Brandt
+// Copyright (c) 2020-2021 Christopher M. Brandt
 // All rights reserved
 
 #include <iostream>
@@ -18,10 +18,10 @@ int main()
   double s = 5.5;
 
   // Broadcast scalar value to each element of SIMD object
-  auto av = nola::simd::avx2_broadcast(&s);
+  auto va = nola::simd::avx2_broadcast(&s);
 
   // Transfer data from SIMD object to container
-  nola::simd::avx2_store( a.data(), av );
+  nola::simd::avx2_store( a.data(), va );
 
   // Display result
   nola::util::print_vector("\na", a.size(), a.data(), 2, 3);

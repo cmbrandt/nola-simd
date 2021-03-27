@@ -6,7 +6,7 @@
 #include <nola/simd.hxx>
 #include <test_helpers.hxx>
 #include <test_avx2_float.hxx>
-#include <iomanip>
+
 
 int test_avx2_float()
 {

@@ -45,7 +45,6 @@ print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, R const a
 // Defintions
 
 
-//
 // Print Vector
 
 // Display all elements of a one-dimensional container
@@ -68,7 +67,6 @@ void print_vector(std::string_view s, std::int32_t size, R const a[])
 }
 
 
-//
 // Print Matrix
 
 // Display all elements of a two-dimensional container

@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nCorrelation Double Example." << std::endl;
+  std::cout << "\nSIMD Correlation Double Example." << std::endl;
 
   // Length of sequences
   int n{100};

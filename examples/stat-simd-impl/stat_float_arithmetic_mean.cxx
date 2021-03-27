@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nArithmetic Mean Float Example." << std::endl;
+  std::cout << "\nSIMD Arithmetic Mean Float Example." << std::endl;
 
   // Length of sequence
   int n{100};

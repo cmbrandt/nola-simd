@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nStandard Deviation Double Example." << std::endl;
+  std::cout << "\nSIMD Standard Deviation Double Example." << std::endl;
 
   // Length of sequence
   int n{100};

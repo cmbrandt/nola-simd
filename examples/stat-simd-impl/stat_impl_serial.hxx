@@ -70,7 +70,7 @@ variance_serial(I n, R const x[])
 
   R mean = sum / n;
 
-  // Compute the variance of the sequence
+  // Compute and return the variance of the sequence
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {
@@ -133,7 +133,7 @@ covariance_serial(I n, R const x[], R const y[])
 
   R y_mean = sum / n;
 
-  // Compute the covariance of the two sequences
+  // Compute and return the covariance of the two sequences
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {
@@ -192,7 +192,7 @@ correlation_serial(I n, R const x[], R const y[])
   R x_std = std::sqrt(x_var);
   R y_std = std::sqrt(y_var);
 
-  // Compute the correlation of the two sequences
+  // Compute and return the correlation of the two sequences
   sum = 0.0;
 
   for (I i{0}; i < n; ++i) {
@@ -204,8 +204,6 @@ correlation_serial(I n, R const x[], R const y[])
   R cov = sum / (n - 1);
   return cov / (x_std * y_std);
 }
-
-
 
 
 } // namespace nola

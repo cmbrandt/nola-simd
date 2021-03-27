@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nVariance Float Example." << std::endl;
+  std::cout << "\nSIMD Variance Float Example." << std::endl;
 
   // Length of sequence
   int n{100};

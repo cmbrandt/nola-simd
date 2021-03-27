@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nCorrelation Float Example." << std::endl;
+  std::cout << "\nSIMD Correlation Float Example." << std::endl;
 
   // Length of sequences
   int n{100};

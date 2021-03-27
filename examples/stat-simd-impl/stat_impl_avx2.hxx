@@ -151,7 +151,7 @@ standard_deviation_avx2(I n, R const x[])
 
   R mean = sum / n;
 
-  // Compute and return the variance of the sequence
+  // Compute the variance of the sequence
   sum = 0.0;
 
   for (I i{0}; i < m; ++i) {
@@ -215,7 +215,7 @@ covariance_avx2(I n, R const x[], R const y[])
   R x_mean = sum1 / n;
   R y_mean = sum2 / n;
 
-  // Compute the covariance of the two sequences
+  // Compute and return the covariance of the two sequences
   sum1 = 0.0;
 
   for (I i{0}; i < m; ++i) {
@@ -317,7 +317,7 @@ correlation_avx2(I n, R const x[], R const y[])
   R x_std = std::sqrt(x_var);
   R y_std = std::sqrt(y_var);
 
-  // Compute the correlation of the two sequences
+  // Compute and return the correlation of the two sequences
   sum1 = 0.0;
 
   for (I i{0}; i < m; ++i) {
@@ -347,7 +347,7 @@ correlation_avx2(I n, R const x[], R const y[])
 }
 
 
-}
+} // namespace nola
 
 
 #endif

@@ -128,7 +128,7 @@ avx2_set_zero() { return detail::simd_mm256_setzero<R>::mm256_setzero(); }
 
 
 inline v256f
-avx2_set_scalar(float  a)  { return _mm256_set1_ps(a); }
+avx2_set_scalar(float  a) { return _mm256_set1_ps(a); }
 inline v256d
 avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
@@ -184,17 +184,17 @@ avx2_fma(v256d a, v256d b, v256d c) { return _mm256_fmadd_pd(a, b, c); }
 inline float
 avx2_reduce(v256f a)
 {
-  __m128 low128  = _mm256_castps256_ps128(a);
   __m128 high128 = _mm256_extractf128_ps(a, 1);
+  __m128 low128  = _mm256_castps256_ps128(a);
   __m128 sum128  = _mm_add_ps(low128, high128);
 
-  __m128 low64  = sum128;
-  __m128 high64 = _mm_movehl_ps(sum128, sum128);
-  __m128 sum64  = _mm_add_ps(low64, high64);
+  __m128 low64   = sum128;
+  __m128 high64  = _mm_movehl_ps(sum128, sum128);
+  __m128 sum64   = _mm_add_ps(low64, high64);
 
-  __m128 low  = sum64;
-  __m128 high = _mm_shuffle_ps(sum64, sum64, 0x1);
-  __m128 sum  = _mm_add_ss(low, high);
+  __m128 low     = sum64;
+  __m128 high    = _mm_shuffle_ps(sum64, sum64, 1);
+  __m128 sum     = _mm_add_ss(low, high);
 
   return _mm_cvtss_f32(sum);
 }
@@ -202,12 +202,14 @@ avx2_reduce(v256f a)
 inline double
 avx2_reduce(v256d a)
 {
-  __m128d low128  = _mm256_castpd256_pd128(a);
   __m128d high128 = _mm256_extractf128_pd(a, 1);
-          low128  = _mm_add_pd(low128, high128);
+  __m128d low128  = _mm256_castpd256_pd128(a);
+  __m128d sum128  = _mm_add_pd(low128, high128);
 
-  __m128d high64  = _mm_unpackhi_pd(low128, low128);
-  return _mm_cvtsd_f64(_mm_add_sd(low128, high64));
+  __m128d high64  = _mm_unpackhi_pd(sum128, sum128);
+  __m128d low64   = _mm_add_sd(sum128, high64);
+  
+  return _mm_cvtsd_f64(low64);
 }
 
 

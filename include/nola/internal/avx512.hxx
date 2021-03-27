@@ -128,7 +128,7 @@ avx512_set_zero() { return detail::simd_mm512_setzero<R>::mm512_setzero(); }
 
 
 inline v512f
-avx512_set_scalar(float  a)  { return _mm512_set1_ps(a); }
+avx512_set_scalar(float  a) { return _mm512_set1_ps(a); }
 inline v512d
 avx512_set_scalar(double a) { return _mm512_set1_pd(a); }
 
